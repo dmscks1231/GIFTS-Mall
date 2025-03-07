@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>부드럽게 움직이는 이미지 슬라이더</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+        }
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        /* 라디오 버튼 숨기기 */
+        .radio-buttons {
+            display: none;
+        }
+        
+        /* 기본 슬라이더 애니메이션 */
+        @keyframes slide {
+            0%, 28% {
+                transform: translateX(0);
+            }
+            33%, 61% {
+                transform: translateX(-25%);
+            }
+            66%, 94% {
+                transform: translateX(-50%);
+            }
+            100% {
+                transform: translateX(-75%); /* 다시 처음으로 돌아가는 효과 */
+            }
+        }
+        
+        /* 슬라이드2부터 시작하는 애니메이션 */
+        @keyframes slide-from-2 {
+            0%, 28% {
+                transform: translateX(-25%);
+            }
+            33%, 61% {
+                transform: translateX(-50%);
+            }
+            66%, 94% {
+                transform: translateX(-75%);
+            }
+            100% {
+                transform: translateX(0%);
+            }
+        }
+        
+        /* 슬라이드3부터 시작하는 애니메이션 */
+        @keyframes slide-from-3 {
+            0%, 28% {
+                transform: translateX(-50%);
+            }
+            33%, 61% {
+                transform: translateX(-75%);
+            }
+            66%, 94% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-25%);
+            }
+        }
+        
+        .slider {
+            display: flex;
+            width: 400%; /* 4개의 슬라이드 공간 (3개 원본 + 1개 복제) */
+            height: 100%;
+            position: relative;
+            animation: slide 9s infinite ease-in-out;
+        }
+        
+        /* 슬라이더 컨테이너에 호버 시 애니메이션 일시정지 */
+        .slider-container:hover .slider {
+            animation-play-state: paused;
+        }
+        
+        /* 라디오 버튼 선택 시 애니메이션 재정의 */
+        #slide1:checked ~ .slider {
+            animation: slide 9s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+        
+        #slide2:checked ~ .slider {
+            animation: slide-from-2 9s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+        
+        #slide3:checked ~ .slider {
+            animation: slide-from-3 9s infinite ease-in-out;
+            animation-delay: 2s;
+        }
+        
+        /* 라디오 버튼 선택 시 즉시 해당 슬라이드로 이동 */
+        #slide1:checked ~ .slider {
+            transform: translateX(0);
+        }
+        
+        #slide2:checked ~ .slider {
+            transform: translateX(-25%);
+        }
+        
+        #slide3:checked ~ .slider {
+            transform: translateX(-50%);
+        }
+        
+        .slide {
+            width: 25%; /* 슬라이더 너비의 1/4 */
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5em;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .slide:nth-child(1) {
+            background-color: #3498db;
+        }
+        
+        .slide:nth-child(2) {
+            background-color: #e74c3c;
+        }
+        
+        .slide:nth-child(3) {
+            background-color: #2ecc71;
+        }
+        
+        .slide:nth-child(4) { /* 첫 번째 슬라이드의 복제본 */
+            background-color: #3498db;
+        }
+        
+        /* 좌우 버튼 */
+        .slider-nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+        }
+        
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            cursor: pointer;
+            margin: auto 20px;
+            pointer-events: auto;
+            z-index: 10;
+        }
+        
+        /* 인디케이터 (하단 점) */
+        .indicators {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            z-index: 10;
+        }
+        
+        .indicator-label {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+        }
+        
+        /* 인디케이터 활성화 시 스타일 */
+        #slide1:checked ~ .indicators .indicator-1,
+        #slide2:checked ~ .indicators .indicator-2,
+        #slide3:checked ~ .indicators .indicator-3 {
+            background-color: white;
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <!-- 라디오 버튼 (상태 저장용) -->
+        <div class="radio-buttons">
+            <input type="radio" name="slider" id="slide1" checked>
+            <input type="radio" name="slider" id="slide2">
+            <input type="radio" name="slider" id="slide3">
+        </div>
+        
+        <!-- 슬라이드 -->
+        <div class="slider">
+            <div class="slide">
+                <h2>이미지 슬라이드 1</h2>
+                <div class="slider-nav">
+                    <label for="slide3" class="nav-btn prev">❮</label>
+                    <label for="slide2" class="nav-btn next">❯</label>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>이미지 슬라이드 2</h2>
+                <div class="slider-nav">
+                    <label for="slide1" class="nav-btn prev">❮</label>
+                    <label for="slide3" class="nav-btn next">❯</label>
+                </div>
+            </div>
+            <div class="slide">
+                <h2>이미지 슬라이드 3</h2>
+                <div class="slider-nav">
+                    <label for="slide2" class="nav-btn prev">❮</label>
+                    <label for="slide1" class="nav-btn next">❯</label>
+                </div>
+            </div>
+            <div class="slide"> <!-- 무한 루프를 위한 첫 번째 슬라이드 복제 -->
+                <h2>이미지 슬라이드 1</h2>
+                <div class="slider-nav">
+                    <label for="slide3" class="nav-btn prev">❮</label>
+                    <label for="slide2" class="nav-btn next">❯</label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 인디케이터 (하단 점) -->
+        <div class="indicators">
+            <label for="slide1" class="indicator-label indicator-1"></label>
+            <label for="slide2" class="indicator-label indicator-2"></label>
+            <label for="slide3" class="indicator-label indicator-3"></label>
+        </div>
+    </div>
+</body>
+</html>
