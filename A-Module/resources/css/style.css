@@ -22,6 +22,49 @@ a {
 ul {
     list-style: none;
 }
+/* 공통작업 */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 섹션 헤더 스타일 */
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title {
+    font-size: 34px;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+    letter-spacing: -0.5px;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 3px;
+    background-color: #e54980;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.section-subtitle {
+    font-size: 16px;
+    color: #666;
+    max-width: 600px;
+    margin: 20px auto 0;
+    font-weight: 300;
+    letter-spacing: -0.3px;
+}
 
 /* 로딩 오버레이 스타일 */
 .loading-overlay {
@@ -35,7 +78,7 @@ ul {
     justify-content: center;
     align-items: center;
     z-index: 9999;
-    animation: fadeOut 0.5s ease 4s forwards; /* 전체 로딩화면 사라짐 효과, 4초 후 시작 */
+    animation: fadeOut 0.5s ease 3.5s forwards;
 }
 
 /* 로딩 컨테이너 */
@@ -98,26 +141,26 @@ ul {
 
 .gift-icon {
     font-size: 60px;
-    animation: iconPulse 4s ease infinite;
+    animation: iconPulse 3.5s ease infinite;
 }
 
 .heart-icon {
     font-size: 30px;
-    animation: iconFloat 4s ease infinite 0.3s;
+    animation: iconFloat 3.5s ease infinite 0.3s;
     top: 20px;
     right: 30px;
 }
 
 .shopping-cart-icon {
     font-size: 30px;
-    animation: iconFloat 4s ease infinite 0.6s;
+    animation: iconFloat 3.5s ease infinite 0.6s;
     bottom: 20px;
     left: 30px;
 }
 
 .star-icon {
     font-size: 30px;
-    animation: iconFloat 4s ease infinite 0.9s;
+    animation: iconFloat 3.5s ease infinite 0.9s;
     bottom: 20px;
     right: 30px;
 }
@@ -316,8 +359,8 @@ header {
     top: 0;
     left: 0;
     z-index: 1000;
-    padding: 20px 0;
-    height: 80px;
+    height: 85px;
+    padding: 10px 0;
 }
 
 /* 헤더 컨테이너 스타일 */
@@ -339,22 +382,10 @@ header {
     display: flex;
     align-items: center;
 }
-
-.logo-text {
-    font-size: 26px;
-    font-weight: 700;
-    color: #e54980;
-    margin: 0;
-    letter-spacing: 1px;
-    transition: all 0.3s ease;
+.logo img {
+    width: 240px;
 }
 
-/* 로고 호버 효과 */
-.logo a:hover .logo-text {
-    text-shadow: 0 0 10px rgba(229, 73, 128, 0.3);
-}
-
-/* 내비게이션 메뉴 스타일 */
 .main-nav ul {
     display: flex;
     gap: 35px;
@@ -428,25 +459,6 @@ header {
     position: relative;
 }
 
-.cart-count {
-    position: absolute;
-    top: -8px;
-    right: -10px;
-    background-color: #e54980;
-    color: white;
-    font-size: 10px;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease;
-}
-
-.cart-icon:hover .cart-count {
-    transform: scale(1.2);
-}
 
 /* 유틸 아이템 호버 효과 */
 .util-item:hover i {
@@ -458,23 +470,49 @@ header {
     50% { transform: translateY(-5px); }
 }
 
-/* 콘텐츠 여백 */
-.content-spacer {
-    height: 80px;
+.drop {
+    position: relative;
 }
 
-/* 메인 콘텐츠 영역 */
-.main-content {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+.drop-content {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: white;
+    min-width: 180px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    padding: 8px;
+    z-index: 999;
 }
 
-/* 임시 텍스트 스타일 */
-.placeholder-text {
-    text-align: center;
-    color: #888;
-    padding: 30px 0;
+.drop:hover .drop-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.drop-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: #333;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.drop-item i {
+
+    margin: 0 10px;
+    color: #E2725B;
+}
+
+.drop-item:hover {
+    background: rgba(226, 114, 91, 0.1);
+    color: #E2725B;
 }
 
 /* 비주얼 슬라이더 영역 스타일 */
@@ -662,7 +700,6 @@ header {
 .primary-btn:hover {
     background-color: #d43a6e;
     box-shadow: 0 8px 25px rgba(229, 73, 128, 0.5); /* 그림자 강화 */
-    transform: translateY(-3px); /* 호버 효과 강화 */
 }
 
 /* 아웃라인 버튼 스타일 */
@@ -676,7 +713,6 @@ header {
     background-color: rgba(255, 255, 255, 0.15); /* 호버 배경 불투명도 증가 */
     border-color: white;
     box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25); /* 그림자 강화 */
-    transform: translateY(-3px); /* 호버 효과 강화 */
 }
 
 /* 슬라이드 장식 아이콘 */
@@ -818,86 +854,10 @@ header {
 }
 
 
-/* 모바일 반응형 조정 */
-@media (max-width: 768px) {
-    .visual-slider {
-        height: 500px;
-    }
-    
-    .slide-content {
-        left: 10%;
-        width: 80%;
-    }
-    
-    .slide-title {
-        font-size: 36px;
-    }
-    
-    .slide-subtitle {
-        font-size: 16px;
-    }
-    
-    .slider-controls {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 30px;
-        padding: 10px 20px;
-    }
-    
-    .prev-btn, .next-btn {
-        width: 40px;
-        height: 40px;
-    }
-    
-    .indicator-progress {
-        width: 36px;
-    }
-}
-
-
 /* 판매상품 섹션 스타일 */
 .products-section {
     padding: 80px 0;
     background-color: #fff;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* 섹션 헤더 스타일 */
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
-
-.section-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 15px;
-    position: relative;
-    display: inline-block;
-}
-
-.section-title::after {
-    content: "";
-    position: absolute;
-    width: 80px;
-    height: 3px;
-    background-color: #e54980;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: #666;
-    max-width: 600px;
-    margin: 20px auto 0;
 }
 
 /* 카테고리 탭 스타일 */
@@ -1405,10 +1365,6 @@ header {
     pointer-events: none;
 }
 
-.container {
-    position: relative;
-    z-index: 2;
-}
 
 /* 베이스 도형 스타일 - 투명도 낮춤 */
 .bg-shape {
@@ -1495,49 +1451,7 @@ header {
 }
 
 
-/* 섹션 헤더 스타일 */
-.section-header {
-    text-align: center;
-    margin-bottom: 50px;
-}
 
-.section-title {
-    font-size: 34px;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 15px;
-    position: relative;
-    display: inline-block;
-    letter-spacing: -0.5px;
-}
-
-.section-title::after {
-    content: "";
-    position: absolute;
-    width: 70px;
-    height: 3px;
-    background-color: #e54980;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 2px;
-}
-
-.section-subtitle {
-    font-size: 16px;
-    color: #666;
-    max-width: 600px;
-    margin: 20px auto 0;
-    font-weight: 300;
-    letter-spacing: -0.3px;
-}
-
-/* 섹션 컨테이너 */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
 
 /* 공지사항 래퍼 */
 .notices-wrapper {
@@ -1882,112 +1796,4 @@ header {
     border-radius: 50px;
     font-size: 13px;
     font-weight: 500;
-}
-
-/* 반응형 스타일 */
-@media (max-width: 992px) {
-    .notices-wrapper {
-        flex-direction: column;
-    }
-    
-    .notice-highlight {
-        flex: none;
-        width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .notice-section {
-        padding: 60px 0;
-    }
-
-    .section-title {
-        font-size: 28px;
-    }
-
-    .section-subtitle {
-        font-size: 15px;
-    }
-
-    .notice-container {
-        padding: 25px 20px;
-    }
-
-    .notice-header {
-        grid-template-columns: 80px 1fr 90px;
-        padding: 14px 15px;
-        font-size: 14px;
-    }
-
-    .notice-item {
-        grid-template-columns: 80px 1fr 90px;
-        padding: 14px 15px;
-    }
-
-    .type-badge {
-        padding: 5px 10px;
-        font-size: 11px;
-        min-width: 60px;
-    }
-
-    .notice-title {
-        padding: 0 10px;
-    }
-
-    .notice-title a {
-        font-size: 14px;
-    }
-
-    .notice-date {
-        font-size: 12px;
-    }
-
-    .page-controls {
-        display: none;
-    }
-
-    .mobile-page-controls {
-        display: flex;
-    }
-}
-
-@media (max-width: 576px) {
-    .notice-section {
-        padding: 50px 0;
-    }
-
-    .section-title {
-        font-size: 26px;
-    }
-
-    .section-subtitle {
-        font-size: 14px;
-    }
-
-    .notice-header {
-        grid-template-columns: 70px 1fr 80px;
-        padding: 12px 10px;
-        font-size: 13px;
-    }
-
-    .notice-item {
-        grid-template-columns: 70px 1fr 80px;
-        padding: 12px 10px;
-    }
-
-    .type-badge {
-        padding: 4px 8px;
-        font-size: 10px;
-        min-width: 50px;
-    }
-    
-    .highlight-content {
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-    
-    .highlight-date {
-        text-align: center;
-    }
 }
