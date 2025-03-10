@@ -2254,44 +2254,6 @@ header {
     }
 }
 
-/* 반응형 스타일 */
-@media (max-width: 1200px) {
-    .banner-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 768px) {
-    .banner-container {
-        grid-template-columns: 1fr;
-    }
-    
-    .process-timeline {
-        grid-template-columns: repeat(3, 1fr);
-        gap: 30px;
-    }
-    
-    .process-timeline::before {
-        display: none;
-    }
-}
-
-@media (max-width: 576px) {
-    .partnership-banner {
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
-    }
-    
-    .banner-icon {
-        margin-right: 0;
-        margin-bottom: 15px;
-    }
-    
-    .process-timeline {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
 
 /* 푸터 영역 스타일 */
 .footer-section {
@@ -2906,11 +2868,7 @@ header {
     .category-tabs {
         margin-bottom: 30px;
         overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         padding-bottom: 10px;
-        /* 스크롤바 숨김 */
-        scrollbar-width: none; /* Firefox */
-        -ms-overflow-style: none; /* IE and Edge */
     }
     
     /* Webkit 브라우저용 스크롤바 숨김 */
