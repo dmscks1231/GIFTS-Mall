@@ -2476,11 +2476,9 @@ header {
 }
 
 .social-icon:nth-child(5):hover {
-    background-color: #ffeb00; /* 카카오톡 색상 */
+    background-color: #ff0000; /* 카카오톡 색상 */
 }
-.social-icon:nth-child(5):hover i {
-    color: #3c1e1e; /* 카카오톡 아이콘 색상 */
-}
+
 
 /* 푸터 하단 영역 - 회사 정보 */
 .footer-bottom {
@@ -2895,13 +2893,7 @@ header {
     /* 공지사항 섹션 */
     .notice-section {
         padding: 50px 0;
-    }
-    
-    .notices-wrapper {
-        flex-direction: column;
-        gap: 20px;
-    }
-    
+    } 
     .notice-highlight {
         flex: none;
         width: 100%;
