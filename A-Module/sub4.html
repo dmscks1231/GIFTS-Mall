@@ -312,55 +312,6 @@
         }
 
 
-
-        /* 모바일 반응형 */
-        @media (max-width: 768px) {
-            .cart-item {
-                grid-template-columns: 80px 1fr;
-                padding: 15px;
-                row-gap: 10px;
-            }
-
-            .cart-header-row {
-                display: none;
-            }
-
-            .item-details {
-                padding: 0 0 0 15px;
-                grid-column: 2;
-            }
-
-            .quantity-control {
-                grid-column: 1 / span 2;
-                margin: 10px 0;
-                width: 120px;
-            }
-
-            .item-price {
-                grid-column: 1;
-                grid-row: 3;
-                justify-self: start;
-                align-self: center;
-            }
-
-            .item-total {
-                grid-column: 2;
-                grid-row: 3;
-                justify-self: end;
-            }
-
-            .item-remove {
-                position: absolute;
-                top: 15px;
-                right: 15px;
-                background-color: #f9f9f9;
-            }
-
-            .cart-summary {
-                margin-top: 30px;
-            }
-        }
-
         .benefits-info {
             font-size: 12px;
             color: #888;
@@ -385,6 +336,168 @@
             font-size: 12px;
             color: #666;
         }
+
+        /* 480px 이하 모바일 반응형 스타일 */
+@media (max-width: 480px) {
+    /* 장바구니 섹션 기본 스타일 조정 */
+    .cart-section {
+        padding: 30px 0 50px;
+        margin-top: 60px;
+    }
+
+    /* 헤더 영역 조정 */
+    .cart-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .cart-title {
+        font-size: 22px;
+    }
+
+    .cart-title::after {
+        width: 30px;
+        height: 2px;
+        bottom: -8px;
+    }
+
+    /* 카트 아이템 조정 */
+    .cart-item {
+        grid-template-columns: 70px 1fr;
+        padding: 12px;
+        row-gap: 8px;
+    }
+
+    .item-image {
+        width: 60px;
+        height: 60px;
+    }
+
+    .item-details {
+        padding: 0 0 0 10px;
+    }
+
+    .item-name {
+        font-size: 14px;
+        margin-bottom: 2px;
+        padding-right: 20px; /* 삭제 버튼을 위한 공간 */
+    }
+
+    .item-category {
+        font-size: 12px;
+    }
+
+    .option-text {
+        font-size: 11px;
+        margin-top: 2px;
+    }
+
+    .benefits-info {
+        font-size: 10px;
+        margin-top: 4px;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    /* 가격 정보 */
+    .item-price {
+        font-size: 14px;
+    }
+
+    .item-original-price {
+        font-size: 11px;
+    }
+
+    .item-current-price {
+        font-size: 14px;
+    }
+
+    .item-total {
+        font-size: 14px;
+    }
+
+    /* 수량 컨트롤 */
+    .quantity-control {
+        width: 100px;
+        margin: 5px 0;
+    }
+
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .quantity-input {
+        width: 40px;
+        height: 30px;
+        font-size: 13px;
+    }
+
+    /* 삭제 버튼 */
+    .item-remove {
+        width: 24px;
+        height: 24px;
+        font-size: 14px;
+        top: 10px;
+        right: 10px;
+    }
+
+    /* 주문 요약 */
+    .cart-summary {
+        padding: 15px;
+        margin-top: 30px;
+    }
+
+    .summary-heading {
+        font-size: 16px;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .summary-item {
+        font-size: 13px;
+        margin-bottom: 8px;
+    }
+
+    .summary-item.total {
+        font-size: 16px;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    /* 체크아웃 버튼 */
+    .checkout-btn {
+        height: 45px;
+        font-size: 15px;
+    }
+
+    /* 빈 장바구니 */
+    .empty-cart {
+        padding: 40px 0;
+    }
+
+    .empty-cart-icon {
+        font-size: 50px;
+        margin-bottom: 15px;
+    }
+
+    .empty-cart-text {
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    .shop-now-btn {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .cart-header-row {
+        display: none; /* 모바일에서는 헤더 행을 숨김 */
+    }
+}
     </style>
 </head>
 
@@ -497,7 +610,7 @@
         <div class="container">
             <div class="cart-header">
                 <h1 class="cart-title">장바구니</h1>
-                <a href="index.html" class="continue-shopping">
+                <a href="sub2.html" class="continue-shopping">
                     <i class="fa fa-arrow-left"></i> 계속 쇼핑하기
                 </a>
             </div>

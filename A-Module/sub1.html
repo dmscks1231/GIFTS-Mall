@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="./resources/css/style.css">
     <style>
-         /* 소개 페이지 특화 스타일 */
-         .about-hero {
+        /* 소개 페이지 특화 스타일 */
+        .about-hero {
             height: 400px;
             background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
             background-size: cover;
@@ -137,12 +137,99 @@
             font-size: 16px;
             color: #666;
         }
+
+
+        /* 480px 이하 모바일 반응형 스타일 */
+        @media (max-width: 480px) {
+
+            /* 히어로 섹션 조정 */
+            .about-hero {
+                height: 250px;
+                margin-top: 60px;
+            }
+
+            .hero-title {
+                font-size: 28px;
+                margin-bottom: 10px;
+            }
+
+            .hero-subtitle {
+                font-size: 14px;
+                margin-bottom: 20px;
+            }
+
+            /* 소개 콘텐츠 섹션 조정 */
+            .about-section {
+                padding: 40px 0;
+            }
+
+            .section-header {
+                margin-bottom: 30px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .section-subtitle {
+                font-size: 14px;
+                margin-top: 15px;
+            }
+
+            /* 콘텐츠 블록 레이아웃 변경 */
+            .content-block {
+                flex-direction: column;
+                margin: 0 auto 50px;
+                gap: 20px;
+            }
+
+            /* 홀수/짝수 블록 모두 동일한 순서로 표시 */
+            .content-block:nth-child(even) {
+                flex-direction: column;
+            }
+
+            .image-container img {
+                height: 200px;
+            }
+
+            .block-title {
+                font-size: 22px;
+                margin-bottom: 15px;
+            }
+
+            .block-description {
+                font-size: 13px;
+                line-height: 1.6;
+                margin-top: 20px;
+            }
+
+            /* 핵심 지표 섹션 */
+            .key-figures {
+                flex-direction: column;
+                gap: 15px;
+                margin-top: 20px;
+            }
+
+            .key-figure {
+                width: 100%;
+                padding: 15px;
+            }
+
+            .figure-number {
+                font-size: 24px;
+                margin-bottom: 5px;
+            }
+
+            .figure-label {
+                font-size: 14px;
+            }
+        }
     </style>
 </head>
 
 <body>
-     <!-- 헤더 영역 시작 -->
-     <header>
+    <!-- 헤더 영역 시작 -->
+    <header>
         <div class="header-container">
             <!-- 로고 영역 -->
             <div class="logo">
@@ -151,303 +238,308 @@
                 </a>
             </div>
 
-           <!-- 모바일 메뉴 토글 추가 -->
-        <input type="checkbox" id="mobile-menu-toggle" hidden>
-        <label for="mobile-menu-toggle" class="mobile-menu-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </label>
+            <!-- 모바일 메뉴 토글 추가 -->
+            <input type="checkbox" id="mobile-menu-toggle" hidden>
+            <label for="mobile-menu-toggle" class="mobile-menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </label>
 
-        <!-- 내비게이션 메뉴 (드롭다운 체크박스 추가 및 유틸 메뉴 통합) -->
-        <nav class="mobile-main-nav">
-            <ul>
-                <li><a href="sub1.html">소개</a></li>
-                <li class="drop">
-                    <input type="checkbox" id="drop-toggle-1" class="drop-toggle" hidden>
-                    <label for="drop-toggle-1" class="drop-label"></label>
-                    <a href="sub2.html" class="nav-item">판매상품</a>
-                    <div class="drop-content">
-                        <a href="sub2.html" class="drop-item">
-                            <i class="fa fa-th"></i>
-                            전체상품
-                        </a>
-                        <a href="sub3.html" class="drop-item">
-                            <i class="fa fa-fire"></i>
-                            인기상품
-                        </a>
-                    </div>
-                </li>
-                <li><a href="#">가맹점</a></li>
-                <li><a href="sub4.html">장바구니</a></li>
-            </ul>
-            
-            <!-- 모바일용 유틸 메뉴 (모바일에서만 표시) -->
-            <div class="mobile-util-menu">
-                <a href="#">
+            <!-- 내비게이션 메뉴 (드롭다운 체크박스 추가 및 유틸 메뉴 통합) -->
+            <nav class="mobile-main-nav">
+                <ul>
+                    <li><a href="sub1.html">소개</a></li>
+                    <li class="drop">
+                        <input type="checkbox" id="drop-toggle-1" class="drop-toggle" hidden>
+                        <label for="drop-toggle-1" class="drop-label"></label>
+                        <a href="sub2.html" class="nav-item">판매상품</a>
+                        <div class="drop-content">
+                            <a href="sub2.html" class="drop-item">
+                                <i class="fa fa-th"></i>
+                                전체상품
+                            </a>
+                            <a href="sub3.html" class="drop-item">
+                                <i class="fa fa-fire"></i>
+                                인기상품
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#">가맹점</a></li>
+                    <li><a href="sub4.html">장바구니</a></li>
+                </ul>
+
+                <!-- 모바일용 유틸 메뉴 (모바일에서만 표시) -->
+                <div class="mobile-util-menu">
+                    <a href="#">
+                        <i class="fa fa-user"></i>
+                        <span>로그인</span>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-gift"></i>
+                        <span>회원가입</span>
+                    </a>
+                    <a href="sub4.html">
+                        <i class="fa fa-shopping-cart"></i>
+                        <span>장바구니</span>
+                    </a>
+                    <a href="#">
+                        <i class="fa fa-cog"></i>
+                        <span>관리자</span>
+                    </a>
+                </div>
+            </nav>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="sub1.html">소개</a></li>
+                    <li class="drop">
+                        <a href="sub2.html" class="nav-item">판매상품</a>
+                        <div class="drop-content">
+                            <a href="sub2.html" class="drop-item">
+                                <i class="fa fa-th"></i>
+                                전체상품
+                            </a>
+                            <a href="sub3.html" class="drop-item">
+                                <i class="fa fa-fire"></i>
+                                인기상품
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#">가맹점</a>
+                    <li><a href="sub4.html">장바구니</a></li>
+                </ul>
+            </nav>
+            <!-- 유틸 메뉴 (원래 코드 그대로 - 모바일에서는 CSS로 숨김) -->
+            <div class="util-nav">
+                <a href="#" class="util-item">
                     <i class="fa fa-user"></i>
                     <span>로그인</span>
                 </a>
-                <a href="#">
+                <a href="#" class="util-item">
                     <i class="fa fa-gift"></i>
                     <span>회원가입</span>
                 </a>
-                <a href="sub4.html">
+                <a href="sub4.html" class="util-item cart-icon">
                     <i class="fa fa-shopping-cart"></i>
                     <span>장바구니</span>
+                    <span class="cart-count">0</span>
                 </a>
-                <a href="#">
+                <a href="#" class="util-item">
                     <i class="fa fa-cog"></i>
                     <span>관리자</span>
                 </a>
             </div>
-        </nav>
-        <nav class="main-nav">
-            <ul>
-                <li><a href="sub1.html">소개</a></li>
-                <li class="drop">
-                    <a href="sub2.html" class="nav-item">판매상품</a>
-                    <div class="drop-content">
-                        <a href="sub2.html" class="drop-item">
-                            <i class="fa fa-th"></i>
-                            전체상품
-                        </a>
-                        <a href="sub3.html" class="drop-item">
-                            <i class="fa fa-fire"></i>
-                            인기상품
-                        </a>
-                    </div>
-                </li>
-                <li><a href="#">가맹점</a>
-                <li><a href="sub4.html">장바구니</a></li>
-            </ul>
-        </nav>
-        <!-- 유틸 메뉴 (원래 코드 그대로 - 모바일에서는 CSS로 숨김) -->
-        <div class="util-nav">
-            <a href="#" class="util-item">
-                <i class="fa fa-user"></i>
-                <span>로그인</span>
-            </a>
-            <a href="#" class="util-item">
-                <i class="fa fa-gift"></i>
-                <span>회원가입</span>
-            </a>
-            <a href="sub4.html" class="util-item cart-icon">
-                <i class="fa fa-shopping-cart"></i>
-                <span>장바구니</span>
-                <span class="cart-count">0</span>
-            </a>
-            <a href="#" class="util-item">
-                <i class="fa fa-cog"></i>
-                <span>관리자</span>
-            </a>
-        </div>
         </div>
     </header>
 
-   <!-- 히어로 섹션 -->
-   <section class="about-hero">
-    <div class="hero-content">
-        <h1 class="hero-title">GIFTS:Mall 소개</h1>
-        <p class="hero-subtitle">특별한 순간을 찾아드리는 GIFTS:Mall은 고객과 가장 가까운 곳에서 정(情)을 전달합니다.</p>
-        <a href="#about-content" class="slide-btn primary-btn">자세히 보기 <i class="fa fa-arrow-right"></i></a>
-    </div>
-</section>
-
-<!-- 소개 콘텐츠 섹션 -->
-<section class="about-section" id="about-content">
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">GIFTS:Mall 소개</h2>
-            <p class="section-subtitle">누구에게나 잊지 못할 선물의 순간을 Gifts:Mall은 그런 순간을 만드는 브랜드입니다.</p>
+    <!-- 히어로 섹션 -->
+    <section class="about-hero">
+        <div class="hero-content">
+            <h1 class="hero-title">GIFTS:Mall 소개</h1>
+            <p class="hero-subtitle">특별한 순간을 찾아드리는 GIFTS:Mall은 고객과 가장 가까운 곳에서 정(情)을 전달합니다.</p>
+            <a href="#about-content" class="slide-btn primary-btn">자세히 보기 <i class="fa fa-arrow-right"></i></a>
         </div>
-        <!-- 첫 번째 콘텐츠 블록 -->
-        <div class="content-block">
-            <div class="image-container">
-                <img src="./resources/images/26.JPG" alt="오프라인 매장">
+    </section>
+
+    <!-- 소개 콘텐츠 섹션 -->
+    <section class="about-section" id="about-content">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">GIFTS:Mall 소개</h2>
+                <p class="section-subtitle">누구에게나 잊지 못할 선물의 순간을 Gifts:Mall은 그런 순간을 만드는 브랜드입니다.</p>
             </div>
-            <div class="text-container">
-                <h2 class="block-title">고객과 가장 가까운 <br>곳에서 정(情)을 전달합니다.</h2>
-                <p class="block-description">
-                    우리는 100여개의 매장을 기반으로 고객에게 상품을 큐레이션합니다. 또한 체험형 콘텐츠와 커머스의 연계를 통해 파트너사들에게 매력적인 브랜딩, 마케팅 채널로 진화하고 있습니다.
-                </p>
-                <div class="key-figures">
-                    <div class="key-figure">
-                        <div class="figure-number">100+</div>
-                        <div class="figure-label">오프라인 매장</div>
+            <!-- 첫 번째 콘텐츠 블록 -->
+            <div class="content-block">
+                <div class="image-container">
+                    <img src="./resources/images/26.JPG" alt="오프라인 매장">
+                </div>
+                <div class="text-container">
+                    <h2 class="block-title">고객과 가장 가까운 <br>곳에서 정(情)을 전달합니다.</h2>
+                    <p class="block-description">
+                        우리는 100여개의 매장을 기반으로 고객에게 상품을 큐레이션합니다. 또한 체험형 콘텐츠와 커머스의 연계를 통해 파트너사들에게 매력적인 브랜딩, 마케팅 채널로 진화하고
+                        있습니다.
+                    </p>
+                    <div class="key-figures">
+                        <div class="key-figure">
+                            <div class="figure-number">100+</div>
+                            <div class="figure-label">오프라인 매장</div>
+                        </div>
+                        <div class="key-figure">
+                            <div class="figure-number">5,000+</div>
+                            <div class="figure-label">파트너사</div>
+                        </div>
                     </div>
-                    <div class="key-figure">
-                        <div class="figure-number">5,000+</div>
-                        <div class="figure-label">파트너사</div>
+                </div>
+            </div>
+
+            <!-- 두 번째 콘텐츠 블록 -->
+            <div class="content-block">
+                <div class="image-container">
+                    <img src="./resources/images/07.jpg" alt="온라인 플랫폼">
+                </div>
+                <div class="text-container">
+                    <h2 class="block-title">고객의 니즈를 반영하는 온라인 PLAYGROUND를 제공합니다.</h2>
+                    <p class="block-description">
+                        우리는 차별화된 온라인 콘텐츠와 AI기술 기반 상품 추천을 통해 월 이용자 수 480만명, 멤버십 회원 수 1,400만명 이상의 선물 커뮤니티를 구현했습니다. 또한 업계
+                        최초 당일 배송 서비스인 오늘드림을 실행하여 고객경험을 혁신했습니다.
+                    </p>
+                    <div class="key-figures">
+                        <div class="key-figure">
+                            <div class="figure-number">480만</div>
+                            <div class="figure-label">월 이용자 수</div>
+                        </div>
+                        <div class="key-figure">
+                            <div class="figure-number">1,400만+</div>
+                            <div class="figure-label">멤버십 회원 수</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 세 번째 콘텐츠 블록 -->
+            <div class="content-block">
+                <div class="image-container">
+                    <img src="./resources/images/06.jpg" alt="글로벌 사업">
+                </div>
+                <div class="text-container">
+                    <h2 class="block-title">전 세계에 Made in Korea<br> 브랜드를 알립니다.</h2>
+                    <p class="block-description">
+                        우리는 Made in Korea 브랜드들이 세계로 뻗어 나가는 교두보 역할을 수행합니다. 2024년 런칭한 글로벌몰과 연간 약 300만명 이상이 외국인 고객이 방문하는 국내
+                        글로벌 특화매장은 파트너사와 함께 글로벌 시장에서 동반 성장을 할 수 있는 핵심 원동력입니다.
+                    </p>
+                    <div class="key-figures">
+                        <div class="key-figure">
+                            <div class="figure-number">300만+</div>
+                            <div class="figure-label">연간 외국인 방문객</div>
+                        </div>
+                        <div class="key-figure">
+                            <div class="figure-number">2024</div>
+                            <div class="figure-label">글로벌몰 런칭</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 네 번째 콘텐츠 블록 -->
+            <div class="content-block">
+                <div class="image-container">
+                    <img src="./resources/images/15.JPG" alt="라이프스타일 플랫폼">
+                </div>
+                <div class="text-container">
+                    <h2 class="block-title">가치지향 라이프스타일 플랫폼</h2>
+                    <p class="block-description">
+                        가치지향 라이프스타일 플랫폼을 통해 고객에게 다양한 즐거움을 선물합니다. 고객이 라이프스타일 전반에서 자신만의 가치와 취향을 반영한 브랜드를 탐색할 수 있습니다. 이러한
+                        고객 경험의 확장을 통해 우리는 종합 라이프스타일 플랫폼으로 도약합니다.
+                    </p>
+                    <div class="key-figures">
+                        <div class="key-figure">
+                            <div class="figure-number">5개</div>
+                            <div class="figure-label">핵심 가치 영역</div>
+                        </div>
+                        <div class="key-figure">
+                            <div class="figure-number">∞</div>
+                            <div class="figure-label">무한한 가능성</div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- 두 번째 콘텐츠 블록 -->
-        <div class="content-block">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="온라인 플랫폼">
-            </div>
-            <div class="text-container">
-                <h2 class="block-title">고객의 니즈를 반영하는 온라인 PLAYGROUND를 제공합니다.</h2>
-                <p class="block-description">
-                    우리는 차별화된 온라인 콘텐츠와 AI기술 기반 상품 추천을 통해 월 이용자 수 480만명, 멤버십 회원 수 1,400만명 이상의 선물 커뮤니티를 구현했습니다. 또한 업계 최초 당일 배송 서비스인 오늘드림을 실행하여 고객경험을 혁신했습니다.
-                </p>
-                <div class="key-figures">
-                    <div class="key-figure">
-                        <div class="figure-number">480만</div>
-                        <div class="figure-label">월 이용자 수</div>
-                    </div>
-                    <div class="key-figure">
-                        <div class="figure-number">1,400만+</div>
-                        <div class="figure-label">멤버십 회원 수</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 세 번째 콘텐츠 블록 -->
-        <div class="content-block">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1526400473556-aac12354f3db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="글로벌 사업">
-            </div>
-            <div class="text-container">
-                <h2 class="block-title">전 세계에 Made in Korea<br> 브랜드를 알립니다.</h2>
-                <p class="block-description">
-                    우리는 Made in Korea 브랜드들이 세계로 뻗어 나가는 교두보 역할을 수행합니다. 2024년 런칭한 글로벌몰과 연간 약 300만명 이상이 외국인 고객이 방문하는 국내 글로벌 특화매장은 파트너사와 함께 글로벌 시장에서 동반 성장을 할 수 있는 핵심 원동력입니다.
-                </p>
-                <div class="key-figures">
-                    <div class="key-figure">
-                        <div class="figure-number">300만+</div>
-                        <div class="figure-label">연간 외국인 방문객</div>
-                    </div>
-                    <div class="key-figure">
-                        <div class="figure-number">2024</div>
-                        <div class="figure-label">글로벌몰 런칭</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- 네 번째 콘텐츠 블록 -->
-        <div class="content-block">
-            <div class="image-container">
-                <img src="https://images.unsplash.com/photo-1577041677443-8bbdfd8cce62?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="라이프스타일 플랫폼">
-            </div>
-            <div class="text-container">
-                <h2 class="block-title">가치지향 라이프스타일 플랫폼</h2>
-                <p class="block-description">
-                    가치지향 라이프스타일 플랫폼을 통해 고객에게 다양한 즐거움을 선물합니다. 고객이 라이프스타일 전반에서 자신만의 가치와 취향을 반영한 브랜드를 탐색할 수 있습니다. 이러한 고객 경험의 확장을 통해 우리는 종합 라이프스타일 플랫폼으로 도약합니다.
-                </p>
-                <div class="key-figures">
-                    <div class="key-figure">
-                        <div class="figure-number">5개</div>
-                        <div class="figure-label">핵심 가치 영역</div>
-                    </div>
-                    <div class="key-figure">
-                        <div class="figure-number">∞</div>
-                        <div class="figure-label">무한한 가능성</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
 
     <!-- 푸터 영역 시작 -->
-<footer class="footer-section">
-    <div class="container">
-        <!-- 푸터 상단 영역 -->
-        <div class="footer-top">
-            <div class="footer-info-column">
-                <!-- 푸터 로고 -->
-                <a href="index.html" class="footer-logo-link">
-                    <div class="footer-symbol">
-                        <img src="./logo.png" alt="GIFTS:Mall 로고" class="footer-logo-img">
+    <footer class="footer-section">
+        <div class="container">
+            <!-- 푸터 상단 영역 -->
+            <div class="footer-top">
+                <div class="footer-info-column">
+                    <!-- 푸터 로고 -->
+                    <a href="index.html" class="footer-logo-link">
+                        <div class="footer-symbol">
+                            <img src="./logo.png" alt="GIFTS:Mall 로고" class="footer-logo-img">
+                        </div>
+                    </a>
+                    <p class="footer-slogan">특별한 순간을 찾아드립니다</p>
+                </div>
+
+                <div class="footer-customer-center">
+                    <h3 class="footer-title">고객센터 이용안내</h3>
+                    <div class="customer-info">
+                        <div class="info-group">
+                            <p><strong>온라인몰 고객센터</strong> 1580-8282</p>
+                            <p><strong>매장고객센터</strong> 1577-8254</p>
+                        </div>
+                        <div class="info-group operation-time">
+                            <p><strong>고객센터 운영시간</strong> [평일 09:00 - 18:00]</p>
+                            <p class="note">주말 및 공휴일은 1:1문의하기를 이용해주세요.<br>업무가 시작되면 바로 처리해드립니다.</p>
+                        </div>
                     </div>
-                </a>
-                <p class="footer-slogan">특별한 순간을 찾아드립니다</p>
-            </div>
-            
-            <div class="footer-customer-center">
-                <h3 class="footer-title">고객센터 이용안내</h3>
-                <div class="customer-info">
-                    <div class="info-group">
-                        <p><strong>온라인몰 고객센터</strong> 1580-8282</p>
-                        <p><strong>매장고객센터</strong> 1577-8254</p>
-                    </div>
-                    <div class="info-group operation-time">
-                        <p><strong>고객센터 운영시간</strong> [평일 09:00 - 18:00]</p>
-                        <p class="note">주말 및 공휴일은 1:1문의하기를 이용해주세요.<br>업무가 시작되면 바로 처리해드립니다.</p>
+                </div>
+
+                <div class="footer-contact">
+                    <h3 class="footer-title">문의하기</h3>
+                    <div class="contact-buttons">
+                        <a href="#" class="footer-btn primary-btn">
+                            <i class="fa fa-headphones"></i>
+                            <span>1:1 문의하기</span>
+                        </a>
+                        <a href="#" class="footer-btn outline-btn">
+                            <i class="fa fa-question-circle"></i>
+                            <span>자주 묻는 질문</span>
+                        </a>
                     </div>
                 </div>
             </div>
-            
-            <div class="footer-contact">
-                <h3 class="footer-title">문의하기</h3>
-                <div class="contact-buttons">
-                    <a href="#" class="footer-btn primary-btn">
-                        <i class="fa fa-headphones"></i>
-                        <span>1:1 문의하기</span>
+
+            <!-- 푸터 중간 영역 - 메뉴 및 SNS 링크 -->
+            <div class="footer-middle">
+                <div class="footer-menu">
+                    <a href="#">개인정보처리방침</a>
+                    <a href="#">이용약관·법적고지</a>
+                    <a href="#">청소년보호방침</a>
+                    <a href="#">이메일무단수집거부</a>
+                    <a href="#">사이트맵</a>
+                    <a href="#">채용</a>
+                </div>
+
+                <div class="footer-social">
+                    <a href="#" class="social-icon" title="페이스북">
+                        <i class="fa fa-facebook"></i>
                     </a>
-                    <a href="#" class="footer-btn outline-btn">
-                        <i class="fa fa-question-circle"></i>
-                        <span>자주 묻는 질문</span>
+                    <a href="#" class="social-icon" title="인스타그램">
+                        <i class="fa fa-instagram"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="유튜브">
+                        <i class="fa fa-youtube-play"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="트위터">
+                        <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-icon" title="카카오톡">
+                        <i class="fa fa-comment"></i>
                     </a>
                 </div>
             </div>
-        </div>
-        
-        <!-- 푸터 중간 영역 - 메뉴 및 SNS 링크 -->
-        <div class="footer-middle">
-            <div class="footer-menu">
-                <a href="#">개인정보처리방침</a>
-                <a href="#">이용약관·법적고지</a>
-                <a href="#">청소년보호방침</a>
-                <a href="#">이메일무단수집거부</a>
-                <a href="#">사이트맵</a>
-                <a href="#">채용</a>
-            </div>
-            
-            <div class="footer-social">
-                <a href="#" class="social-icon" title="페이스북">
-                    <i class="fa fa-facebook"></i>
-                </a>
-                <a href="#" class="social-icon" title="인스타그램">
-                    <i class="fa fa-instagram"></i>
-                </a>
-                <a href="#" class="social-icon" title="유튜브">
-                    <i class="fa fa-youtube-play"></i>
-                </a>
-                <a href="#" class="social-icon" title="트위터">
-                    <i class="fa fa-twitter"></i>
-                </a>
-                <a href="#" class="social-icon" title="카카오톡">
-                    <i class="fa fa-comment"></i>
-                </a>
+
+            <!-- 푸터 하단 영역 - 회사 정보 -->
+            <div class="footer-bottom">
+                <div class="company-info">
+                    <p>(주)GIFTS:Mall | 사업자등록번호 : 809-81-01157 | 대표이사 황기영</p>
+                    <p>주소 : 서울특별시 용산구 한강대로 123, 40층</p>
+                    <p>본사 대표전화 : 02-123-4567 | GIFTS:Mall 가맹상담전화 : 02-123-4568</p>
+                    <p class="copyright">COPYRIGHTⓒ 2024 GIFTS:MALL KOREA INC. ALL RIGHTS RESERVED</p>
+                </div>
+
+                <div class="secure-service">
+                    <p class="secure-text">
+                        <strong>지방은행구매안전서비스</strong>
+                        <span>GIFTS:Mall은 현금 결제한 금액에 대해 지방은행과 채무지급보증 계약을<br>체결하여 안전한 거래를 보장하고 있습니다</span>
+                    </p>
+                    <a href="#" class="secure-link">서비스 가입사실 확인 <i class="fa fa-angle-right"></i></a>
+                </div>
             </div>
         </div>
-        
-        <!-- 푸터 하단 영역 - 회사 정보 -->
-        <div class="footer-bottom">
-            <div class="company-info">
-                <p>(주)GIFTS:Mall | 사업자등록번호 : 809-81-01157 | 대표이사 황기영</p>
-                <p>주소 : 서울특별시 용산구 한강대로 123, 40층</p>
-                <p>본사 대표전화 : 02-123-4567 | GIFTS:Mall 가맹상담전화 : 02-123-4568</p>
-                <p class="copyright">COPYRIGHTⓒ 2024 GIFTS:MALL KOREA INC. ALL RIGHTS RESERVED</p>
-            </div>
-            
-            <div class="secure-service">
-                <p class="secure-text">
-                    <strong>지방은행구매안전서비스</strong>
-                    <span>GIFTS:Mall은 현금 결제한 금액에 대해 지방은행과 채무지급보증 계약을<br>체결하여 안전한 거래를 보장하고 있습니다</span>
-                </p>
-                <a href="#" class="secure-link">서비스 가입사실 확인 <i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-    </div>
-</footer>
+    </footer>
 
 </body>
+
 </html>

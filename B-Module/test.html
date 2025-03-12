@@ -1,0 +1,712 @@
+<style>
+    /* 비회원 주문 버튼 */
+.non-member-order-button-container {
+    text-align: center;
+    margin: 30px 0 60px;
+}
+
+.non-member-order-btn {
+    background-color: #e54980;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(229, 73, 128, 0.3);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.non-member-order-btn:hover {
+    background-color: #d4356c;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(229, 73, 128, 0.4);
+}
+
+.non-member-order-btn i {
+    font-size: 18px;
+}
+
+/* 모달 스타일 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+}
+
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 1000px;
+    max-height: 90vh;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #eee;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    font-size: 22px;
+    color: #666;
+    cursor: pointer;
+    padding: 5px;
+    transition: all 0.2s ease;
+}
+
+.close-modal:hover {
+    color: #e54980;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+    max-height: calc(90vh - 70px);
+}
+
+/* 회원정보 영역 */
+.member-info-area {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+}
+
+.member-info-area h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.guest-id-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.guest-id {
+    font-weight: 600;
+    font-size: 16px;
+    color: #e54980;
+    background-color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+/* 전시 영역 스타일 */
+.display-area {
+    margin-bottom: 20px;
+}
+
+.display-area h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.drag-instruction {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.product-categories {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.tab-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto;
+}
+
+.tab-item {
+    padding: 12px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.tab-item:hover {
+    background-color: #eee;
+    color: #e54980;
+}
+
+.tab-item.active {
+    background-color: #e54980;
+    color: white;
+    font-weight: 600;
+}
+
+.products-container {
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 15px;
+    background-color: #fff;
+}
+
+.product-category {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+}
+
+.product-category.active {
+    display: grid;
+}
+
+.product-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    cursor: grab;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-card.dragging {
+    opacity: 0.7;
+    transform: scale(0.95);
+}
+
+.product-card.selected {
+    opacity: 0.6;
+}
+
+.product-thumb {
+    height: 140px;
+    overflow: hidden;
+}
+
+.product-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-thumb img {
+    transform: scale(1.05);
+}
+
+.product-info {
+    padding: 10px;
+    position: relative;
+}
+
+.product-title {
+    margin: 0 0 5px;
+    font-size: 14px;
+    color: #333;
+    line-height: 1.3;
+    height: 36px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.product-price {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+
+.old-price {
+    font-size: 12px;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.current-price {
+    font-size: 14px;
+    font-weight: 700;
+    color: #e54980;
+}
+
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #e54980;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 4px;
+}
+
+.empty-category {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* 주문 영역 스타일 */
+.order-area {
+    margin-bottom: 20px;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 200px;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+}
+
+.order-area.drag-over {
+    background-color: #f0f8ff;
+    border-color: #e54980;
+}
+
+.order-area h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.empty-cart {
+    text-align: center;
+    color: #999;
+    margin-top: 60px;
+}
+
+.remove-instruction {
+    display: none;
+    color: #666;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.order-product-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.order-item {
+    display: grid;
+    grid-template-columns: 80px 1fr 120px 100px;
+    gap: 10px;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    cursor: grab;
+}
+
+.order-item.dragging {
+    opacity: 0.7;
+}
+
+.order-item-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.order-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.order-item-title {
+    margin: 0 0 5px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.order-item-price {
+    font-size: 14px;
+    color: #666;
+}
+
+.order-item-quantity {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-input {
+    width: 40px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.decrease-quantity, .increase-quantity {
+    width: 30px;
+    height: 30px;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.decrease-quantity:hover, .increase-quantity:hover {
+    background-color: #e0e0e0;
+}
+
+.order-item-total {
+    font-weight: 600;
+    color: #e54980;
+    font-size: 15px;
+    text-align: right;
+}
+
+/* 결제 영역 스타일 */
+.payment-area {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.payment-area h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 18px;
+    color: #333;
+}
+
+.payment-info {
+    margin-bottom: 20px;
+}
+
+.payment-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    color: #666;
+}
+
+.payment-row.total {
+    font-weight: 700;
+    color: #333;
+    font-size: 18px;
+    margin-top: 10px;
+    border-bottom: none;
+}
+
+.order-button {
+    width: 100%;
+    background-color: #e54980;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.order-button:hover:not([disabled]) {
+    background-color: #d4356c;
+}
+
+.order-button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* 주문 완료 알림 스타일 */
+.order-notification {
+    display: none;
+    position: fixed;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    animation: fadeInOut 3s ease forwards;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.notification-content i {
+    font-size: 20px;
+    color: #4CAF50;
+}
+
+@keyframes fadeInOut {
+    0% { opacity: 0; transform: translate(-50%, -20px); }
+    10% { opacity: 1; transform: translate(-50%, 0); }
+    90% { opacity: 1; transform: translate(-50%, 0); }
+    100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+/* 반응형 스타일 */
+@media (max-width: 768px) {
+    .product-category {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    
+    .order-item {
+        grid-template-columns: 60px 1fr;
+        grid-template-rows: auto auto;
+    }
+    
+    .order-item-quantity {
+        grid-column: 2;
+        justify-content: flex-start;
+        margin-top: 5px;
+    }
+    
+    .order-item-total {
+        grid-column: 1 / -1;
+        text-align: right;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #eee;
+    }
+}
+
+@media (max-width: 576px) {
+    .product-category {
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    }
+    
+    .modal-content {
+        width: 95%;
+    }
+    
+    .modal-header h2 {
+        font-size: 20px;
+    }
+}
+</style>
+
+<!-- 비회원 주문 버튼 -->
+<div class="non-member-order-button-container">
+    <button id="nonMemberOrderBtn" class="non-member-order-btn">
+        <i class="fa fa-shopping-cart"></i> 비회원 주문하기
+    </button>
+</div>
+
+<!-- 비회원 주문 모달 -->
+<div id="nonMemberOrderModal" class="modal">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>비회원 주문</h2>
+            <button class="close-modal"><i class="fa fa-times"></i></button>
+        </div>
+        
+        <div class="modal-body">
+            <!-- 회원정보 영역 -->
+            <div class="member-info-area">
+                <h3>회원정보</h3>
+                <div class="guest-id-container">
+                    <span>비회원 ID: </span>
+                    <span id="guestId" class="guest-id"></span>
+                </div>
+            </div>
+            
+            <!-- 전시 영역 -->
+            <div class="display-area">
+                <h3>상품 선택</h3>
+                <p class="drag-instruction"><i class="fa fa-hand-paper-o"></i> 상품을 드래그하여 주문 영역으로 옮기세요</p>
+                
+                <div class="product-categories">
+                    <ul class="tab-list">
+                        <li class="tab-item" data-category="health">
+                            <i class="fa fa-heartbeat"></i> 건강식품
+                        </li>
+                        <li class="tab-item" data-category="digital">
+                            <i class="fa fa-laptop"></i> 디지털/가전
+                        </li>
+                        <li class="tab-item" data-category="fancy">
+                            <i class="fa fa-gift"></i> 주얼리/액세서리
+                        </li>
+                        <li class="tab-item" data-category="perfume">
+                            <i class="fa fa-leaf"></i> 향수/화장품
+                        </li>
+                        <li class="tab-item" data-category="haircare">
+                            <i class="fa fa-cut"></i> 헤어케어
+                        </li>
+                    </ul>
+                    
+                    <div class="products-container">
+                        <div class="product-category" id="display-health"></div>
+                        <div class="product-category" id="display-digital"></div>
+                        <div class="product-category" id="display-fancy"></div>
+                        <div class="product-category" id="display-perfume"></div>
+                        <div class="product-category" id="display-haircare"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 주문 영역 -->
+            <div class="order-area" id="orderArea">
+                <h3>주문 상품</h3>
+                <p class="drag-instruction empty-cart"><i class="fa fa-shopping-cart"></i> 상품을 이곳으로 드래그하세요</p>
+                <p class="drag-instruction remove-instruction"><i class="fa fa-trash"></i> 상품을 밖으로 드래그하여 제거할 수 있습니다</p>
+                
+                <div class="order-product-list" id="orderProductList">
+                    <!-- 주문된 상품들이 여기에 추가됩니다 -->
+                </div>
+            </div>
+            
+            <!-- 결제 영역 -->
+            <div class="payment-area">
+                <h3>결제 정보</h3>
+                <div class="payment-info">
+                    <div class="payment-row">
+                        <span>총 상품금액:</span>
+                        <span id="totalProductAmount">0원</span>
+                    </div>
+                    <div class="payment-row">
+                        <span>배송비:</span>
+                        <span id="shippingFee">0원</span>
+                    </div>
+                    <div class="payment-row total">
+                        <span>최종 결제금액:</span>
+                        <span id="totalPaymentAmount">0원</span>
+                    </div>
+                </div>
+                
+                <button id="orderButton" class="order-button" disabled>
+                    <i class="fa fa-check-circle"></i> 주문하기
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 주문 완료 알림 -->
+<div id="orderCompleteNotification" class="order-notification">
+    <div class="notification-content">
+        <i class="fa fa-check-circle"></i>
+        <p id="notificationMessage"></p>
+    </div>
+</div>
+
+<!-- 카테고리별 상품 템플릿 -->
+<template id="productTemplate">
+    <div class="product-card" draggable="true">
+        <div class="product-thumb">
+            <img src="" alt="">
+        </div>
+        <div class="product-info">
+            <h4 class="product-title"></h4>
+            <div class="product-price">
+                <span class="old-price"></span>
+                <span class="current-price"></span>
+            </div>
+        </div>
+    </div>
+</template>
+
+<!-- 주문 상품 템플릿 -->
+<template id="orderItemTemplate">
+    <div class="order-item" data-product-id="">
+        <div class="order-item-image">
+            <img src="" alt="">
+        </div>
+        <div class="order-item-info">
+            <h4 class="order-item-title"></h4>
+            <div class="order-item-price">
+                <span class="price"></span>
+            </div>
+        </div>
+        <div class="order-item-quantity">
+            <button class="decrease-quantity"><i class="fa fa-minus"></i></button>
+            <input type="number" min="1" value="1" class="quantity-input">
+            <button class="increase-quantity"><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="order-item-total">
+            <span class="total-price"></span>
+        </div>
+    </div>
+</template>
+
+<script src="./resources/js/jquery-3.4.1.min.js"></script>
+<script src="./resources/js/app.js"></script>
