@@ -1,6 +1,3 @@
-/**
- * 비회원 주문 시스템 JavaScript
- */
 class NonMemberOrderSystem {
   constructor() {
     // DOM 요소
@@ -17,6 +14,7 @@ class NonMemberOrderSystem {
     // 데이터
     this.products = [];
     this.guestId = this.generateId(6);
+    this.cartItems = []; // 장바구니에 있는 상품 ID 배열
     
     this.init();
   }
@@ -179,6 +177,12 @@ class NonMemberOrderSystem {
   setupDragDrop() {
     // 상품 드래그 시작 - ID 선택자로 범위 제한하여 충돌 방지
     $(document).on("dragstart", "#nonMemberOrderModal .product-card", function(e) {
+      // 이미 장바구니에 있는 상품은 드래그 불가능하게 설정
+      if ($(this).hasClass("in-cart")) {
+        e.preventDefault();
+        return false;
+      }
+      
       const id = $(this).data("id");
       e.originalEvent.dataTransfer.setData("productId", id);
       e.originalEvent.dataTransfer.setData("type", "product");
@@ -229,6 +233,9 @@ class NonMemberOrderSystem {
       } else {
         // 새 주문 항목 추가
         this.addOrderItem(product);
+        
+        // 상품 목록에서 해당 상품 비활성화
+        this.deactivateProduct(id);
       }
     });
     
@@ -249,6 +256,45 @@ class NonMemberOrderSystem {
         }
       }
     });
+  }
+  
+  // 상품 비활성화 (장바구니에 추가됨)
+  deactivateProduct(id) {
+    const $product = $(`.product-card[data-id="${id}"]`);
+    $product.addClass("in-cart");
+    $product.attr("draggable", "false");
+    
+    // 시각적으로 비활성화 표시 (CSS 추가 필요)
+    $product.css({
+      "opacity": "0.6",
+      "filter": "grayscale(100%)",
+      "pointer-events": "none"
+    });
+    
+    // 장바구니 아이템 배열에 추가
+    if (!this.cartItems.includes(id)) {
+      this.cartItems.push(id);
+    }
+  }
+  
+  // 상품 활성화 (장바구니에서 제거됨)
+  activateProduct(id) {
+    const $product = $(`.product-card[data-id="${id}"]`);
+    $product.removeClass("in-cart");
+    $product.attr("draggable", "true");
+    
+    // 시각적 비활성화 제거
+    $product.css({
+      "opacity": "",
+      "filter": "",
+      "pointer-events": ""
+    });
+    
+    // 장바구니 아이템 배열에서 제거
+    const index = this.cartItems.indexOf(id);
+    if (index > -1) {
+      this.cartItems.splice(index, 1);
+    }
   }
   
   // 주문 항목 추가
@@ -299,6 +345,9 @@ class NonMemberOrderSystem {
   removeOrderItem(id) {
     this.$orderList.find(`.order-item[data-id="${id}"]`).remove();
     
+    // 상품 목록에서 해당 상품 활성화
+    this.activateProduct(id);
+    
     if (this.$orderList.children().length === 0) {
       this.$emptyCart.show();
       this.$removeMsg.hide();
@@ -343,6 +392,14 @@ class NonMemberOrderSystem {
       $("#orderCompleteNotification").css("display", "none");
     }, 3000);
     
+    // 모든 상품 활성화
+    this.cartItems.forEach(id => {
+      this.activateProduct(id);
+    });
+    
+    // 장바구니 비우기
+    this.cartItems = [];
+    
     // 주문 초기화
     this.$orderList.empty();
     this.$emptyCart.show();
@@ -361,4 +418,4 @@ class NonMemberOrderSystem {
 
 $(document).ready(() => {
   new NonMemberOrderSystem;
-})
+});
