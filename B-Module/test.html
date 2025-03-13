@@ -1,5 +1,286 @@
 <style>
-    /* 비회원 주문 버튼 */
+
+    /* 기존 sub2.html 스타일 */
+.products-section {
+    margin-top: 80px;
+}
+.product-action a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 15px;
+    border-radius: 50px;
+    font-size: 12px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #333;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+}
+
+.product-action a i {
+    margin-right: 6px;
+    font-size: 14px;
+}
+
+.cart-btn:hover {
+    background-color: #e54980;
+    color: #fff;
+}
+
+.buy-now:hover {
+    background-color: #333;
+    color: #fff;
+}
+ /* 할인률 배지 */
+ .discount-rate {
+    background-color: #e54980;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 50px;
+    z-index: 2;
+}
+
+.result-count {
+    font-size: 13px;
+    color: #666;
+}
+
+.result-count strong {
+    color: #e54980;
+    font-weight: 600;
+}
+
+.video-ad-section {
+    padding: 60px 0 40px;
+    margin-top: 85px;
+    background-color: #fff;
+    position: relative;
+}
+
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.video-wrapper video {
+    width: 100%;
+    display: block;
+    background-color: #000;
+}
+
+/* 컨트롤러 보이기 버튼 스타일 (항상 표시됨) */
+.show-controls-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+    color: white;
+    border-radius: 50px;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.show-controls-btn span {
+    font-weight: 500;
+}
+
+.show-controls-btn:hover {
+    opacity: 1;
+    background-color: rgba(229, 73, 128, 0.8);
+}
+
+.show-controls-btn.visible {
+    opacity: 1;
+}
+
+/* 비디오 컨트롤 스타일 */
+.video-controls {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 15px 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    z-index: 3;
+    opacity: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.video-controls.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* 개선된 컨트롤 레이아웃 */
+.controls-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.control-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.main-controls {
+    padding-right: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.speed-controls {
+    padding-right: 20px;
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.control-btn {
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+}
+
+.control-btn:hover {
+    background-color: rgba(229, 73, 128, 0.7);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+}
+
+.control-btn:active {
+    transform: scale(0.95) translateY(0);
+}
+
+.control-btn.active, .toggle-btn[data-active="true"] {
+    background-color: #e54980;
+    color: #fff;
+    border-color: #fff;
+}
+
+.play-btn {
+    width: 46px;
+    height: 46px;
+    font-size: 18px;
+}
+
+.speed-value {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.toggle-btn {
+    position: relative;
+}
+
+.video-notification {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 4px;
+    z-index: 999;
+    font-size: 14px;
+}
+
+/* 모바일 반응형 스타일 */
+@media (max-width: 480px) {
+    .video-ad-section {
+        margin-top: 60px;
+        padding: 10px 0 20px;
+    }
+    
+    .video-wrapper {
+        border-radius: 8px;
+    }
+    
+    .show-controls-btn {
+        top: 10px;
+        right: 10px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .show-controls-btn span {
+        display: none;
+    }
+    
+    .video-controls {
+        padding: 10px;
+    }
+    
+    .control-panel {
+        padding: 8px 15px;
+        flex-wrap: wrap;
+        gap: 15px;
+        border-radius: 30px;
+    }
+    
+    .main-controls, .speed-controls {
+        padding-right: 0;
+        border-right: none;
+        margin-bottom: 10px;
+    }
+    
+    .control-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+    
+    .play-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+    }
+}
+
+/* 비회원 주문 시스템 스타일 - test.html에서 가져옴 */
+/* 비회원 주문 버튼 */
 .non-member-order-button-container {
     text-align: center;
     margin: 30px 0 60px;
@@ -136,7 +417,7 @@
     border: 1px solid #ddd;
 }
 
-/* 전시 영역 스타일 */
+/* 전시 영역 스타일 - 클래스 충돌 해결 */
 .display-area {
     margin-bottom: 20px;
 }
@@ -157,13 +438,14 @@
     gap: 5px;
 }
 
-.product-categories {
+/* 비회원 주문 모달 내부 스타일 - ID로 범위 제한 */
+#nonMemberOrderModal .product-categories {
     border: 1px solid #ddd;
     border-radius: 10px;
     overflow: hidden;
 }
 
-.tab-list {
+#nonMemberOrderModal .tab-list {
     display: flex;
     list-style: none;
     padding: 0;
@@ -173,7 +455,7 @@
     overflow-x: auto;
 }
 
-.tab-item {
+#nonMemberOrderModal .tab-item {
     padding: 12px 20px;
     cursor: pointer;
     white-space: nowrap;
@@ -185,35 +467,36 @@
     transition: all 0.3s ease;
 }
 
-.tab-item:hover {
+#nonMemberOrderModal .tab-item:hover {
     background-color: #eee;
     color: #e54980;
 }
 
-.tab-item.active {
+#nonMemberOrderModal .tab-item.active {
     background-color: #e54980;
     color: white;
     font-weight: 600;
 }
 
-.products-container {
+/* 상품 컨테이너 - 클래스명 변경 */
+#nonMemberOrderModal .order-products-container {
     max-height: 300px;
     overflow-y: auto;
     padding: 15px;
     background-color: #fff;
 }
 
-.product-category {
+#nonMemberOrderModal .product-category {
     display: none;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
 }
 
-.product-category.active {
+#nonMemberOrderModal .product-category.active {
     display: grid;
 }
 
-.product-card {
+#nonMemberOrderModal .product-card {
     border: 1px solid #eee;
     border-radius: 8px;
     overflow: hidden;
@@ -224,42 +507,42 @@
     position: relative;
 }
 
-.product-card:hover {
+#nonMemberOrderModal .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.product-card.dragging {
+#nonMemberOrderModal .product-card.dragging {
     opacity: 0.7;
     transform: scale(0.95);
 }
 
-.product-card.selected {
+#nonMemberOrderModal .product-card.selected {
     opacity: 0.6;
 }
 
-.product-thumb {
+#nonMemberOrderModal .product-thumb {
     height: 140px;
     overflow: hidden;
 }
 
-.product-thumb img {
+#nonMemberOrderModal .product-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.product-card:hover .product-thumb img {
+#nonMemberOrderModal .product-card:hover .product-thumb img {
     transform: scale(1.05);
 }
 
-.product-info {
+#nonMemberOrderModal .product-info {
     padding: 10px;
     position: relative;
 }
 
-.product-title {
+#nonMemberOrderModal .product-title {
     margin: 0 0 5px;
     font-size: 14px;
     color: #333;
@@ -271,26 +554,26 @@
     -webkit-box-orient: vertical;
 }
 
-.product-price {
+#nonMemberOrderModal .product-price {
     display: flex;
     flex-wrap: wrap;
     gap: 5px;
     align-items: center;
 }
 
-.old-price {
+#nonMemberOrderModal .old-price {
     font-size: 12px;
     color: #999;
     text-decoration: line-through;
 }
 
-.current-price {
+#nonMemberOrderModal .current-price {
     font-size: 14px;
     font-weight: 700;
     color: #e54980;
 }
 
-.discount-badge {
+#nonMemberOrderModal .discount-badge {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -523,9 +806,9 @@
     100% { opacity: 0; transform: translate(-50%, -20px); }
 }
 
-/* 반응형 스타일 */
+/* 비회원 주문 모달 반응형 스타일 */
 @media (max-width: 768px) {
-    .product-category {
+    #nonMemberOrderModal .product-category {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
     
@@ -550,7 +833,7 @@
 }
 
 @media (max-width: 576px) {
-    .product-category {
+    #nonMemberOrderModal .product-category {
         grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     }
     
@@ -614,8 +897,11 @@
                         </li>
                     </ul>
                     
-                    <div class="products-container">
-                        <div class="product-category" id="display-health"></div>
+                    <!-- 클래스명 변경: products-container → order-products-container -->
+                    <div class="order-products-container">
+                        <div class="product-category" id="display-health">
+                            <!-- 상품 카드는 JavaScript로 동적 생성됨 -->
+                        </div>
                         <div class="product-category" id="display-digital"></div>
                         <div class="product-category" id="display-fancy"></div>
                         <div class="product-category" id="display-perfume"></div>
@@ -669,44 +955,522 @@
     </div>
 </div>
 
-<!-- 카테고리별 상품 템플릿 -->
-<template id="productTemplate">
-    <div class="product-card" draggable="true">
-        <div class="product-thumb">
-            <img src="" alt="">
-        </div>
-        <div class="product-info">
-            <h4 class="product-title"></h4>
-            <div class="product-price">
-                <span class="old-price"></span>
-                <span class="current-price"></span>
+<script src="./resources/js/jquery-3.4.1.min.js"></script>
+<script>
+    /**
+ * 비회원 주문 시스템 JavaScript
+ */
+class NonMemberOrderSystem {
+    constructor() {
+      // DOM 요소
+      this.$modal = $("#nonMemberOrderModal");
+      this.$orderArea = $("#orderArea");
+      this.$orderList = $("#orderProductList");
+      this.$emptyCart = $(".empty-cart");
+      this.$removeMsg = $(".remove-instruction");
+      this.$totalAmount = $("#totalProductAmount");
+      this.$shipping = $("#shippingFee");
+      this.$totalPayment = $("#totalPaymentAmount");
+      this.$orderBtn = $("#orderButton");
+      
+      // 데이터
+      this.products = [];
+      this.guestId = this.generateId(6);
+      
+      this.init();
+    }
+    
+    // 랜덤 ID 생성
+    generateId(length) {
+      return Math.random().toString(36).substring(2, 2 + length).toUpperCase();
+    }
+    
+    // 초기화
+    init() {
+      $("#guestId").text(this.guestId);
+      
+      // 상품 데이터 로드
+      $.getJSON("./resources/js/data.json", data => {
+        this.products = data.data;
+        this.renderProducts();
+        this.initTabs();
+      });
+      
+      this.bindEvents();
+    }
+    
+    // 상품 렌더링
+    renderProducts() {
+      // 카테고리별 상품 그룹화
+      const groups = {};
+      this.products.forEach(product => {
+        if (!groups[product.category]) groups[product.category] = [];
+        groups[product.category].push(product);
+      });
+      
+      // 각 카테고리 상품 추가
+      Object.keys(groups).forEach(category => {
+        const $container = $(`#display-${category}`).empty();
+        
+        groups[category].forEach(product => {
+          // 할인가 계산
+          let price = product.price;
+          let oldPrice = '';
+          let discount = '';
+          
+          if (product.discountOption === 'percent' && product.discountValue > 0) {
+            price = Math.round(price * (1 - product.discountValue));
+            oldPrice = `<span class="old-price">${product.price.toLocaleString()}원</span>`;
+            discount = `<div class="discount-badge">-${product.discountValue * 100}%</div>`;
+          } else if (product.discountOption === 'minus' && product.discountValue > 0) {
+            price = price - product.discountValue;
+            oldPrice = `<span class="old-price">${product.price.toLocaleString()}원</span>`;
+            discount = `<div class="discount-badge">-${product.discountValue.toLocaleString()}원</div>`;
+          }
+          
+          // 이미지 경로 수정
+          const imgPath = product.image.replace(/^\//, './resources/');
+          
+          // 상품 카드 추가
+          $container.append(`
+            <div class="product-card" draggable="true" data-id="${product.id}">
+              <div class="product-thumb">
+                <img src="${imgPath}" alt="${product.title}">
+              </div>
+              <div class="product-info">
+                <h4 class="product-title">${product.title}</h4>
+                <div class="product-price">
+                  ${oldPrice}
+                  <span class="current-price">${price.toLocaleString()}원</span>
+                </div>
+                ${discount}
+              </div>
             </div>
-        </div>
-    </div>
-</template>
-
-<!-- 주문 상품 템플릿 -->
-<template id="orderItemTemplate">
-    <div class="order-item" data-product-id="">
-        <div class="order-item-image">
-            <img src="" alt="">
-        </div>
-        <div class="order-item-info">
-            <h4 class="order-item-title"></h4>
+          `);
+        });
+      });
+    }
+    
+    // 탭 초기화
+    initTabs() {
+      $("#nonMemberOrderModal .tab-item:first").addClass("active");
+      $("#display-health").addClass("active");
+      
+      $("#nonMemberOrderModal .tab-item").on("click", function() {
+        const category = $(this).data("category");
+        $("#nonMemberOrderModal .tab-item").removeClass("active");
+        $(this).addClass("active");
+        $("#nonMemberOrderModal .product-category").removeClass("active");
+        $(`#display-${category}`).addClass("active");
+      });
+    }
+    
+    // 이벤트 바인딩
+    bindEvents() {
+      // 모달 열기/닫기
+      $("#nonMemberOrderBtn").on("click", () => this.$modal.css("display", "block"));
+      $(".close-modal").on("click", () => this.$modal.css("display", "none"));
+      $(".modal-overlay").on("click", e => {
+        if (e.target === e.currentTarget) this.$modal.css("display", "none");
+      });
+      
+      // 주문 버튼
+      this.$orderBtn.on("click", () => {
+        if (this.$orderList.children().length > 0) this.processOrder();
+      });
+      
+      // 드래그 앤 드롭
+      this.setupDragDrop();
+      
+      // 수량 변경 버튼
+      $(document).on("click", ".decrease-quantity", e => {
+        const $item = $(e.target).closest(".order-item");
+        const $input = $item.find(".quantity-input");
+        const qty = parseInt($input.val());
+        
+        if (qty > 1) {
+          $input.val(qty - 1).trigger("change");
+        } else {
+          this.removeOrderItem($item.data("id"));
+        }
+      });
+      
+      $(document).on("click", ".increase-quantity", e => {
+        const $input = $(e.target).closest(".order-item").find(".quantity-input");
+        $input.val(parseInt($input.val()) + 1).trigger("change");
+      });
+      
+      // 수량 변경 시 가격 업데이트
+      $(document).on("change", ".quantity-input", e => {
+        const $item = $(e.target).closest(".order-item");
+        const id = $item.data("id");
+        const qty = parseInt($(e.target).val());
+        if (qty < 1) {
+          $(e.target).val(1);
+          return;
+        }
+        
+        const product = this.getProduct(id);
+        if (!product) return;
+        
+        // 최종 가격 계산
+        let price = product.price;
+        if (product.discountOption === 'percent') {
+          price = Math.round(price * (1 - product.discountValue));
+        } else if (product.discountOption === 'minus') {
+          price = price - product.discountValue;
+        }
+        
+        // 금액 업데이트
+        const total = price * qty;
+        $item.find(".total-price").text(`${total.toLocaleString()}원`);
+        
+        this.updateTotals();
+      });
+    }
+    
+    // 상품 정보 조회
+    getProduct(id) {
+      return this.products.find(p => p.id == id);
+    }
+    
+    // 드래그 앤 드롭 설정
+    setupDragDrop() {
+      // 상품 드래그 시작 - ID 선택자로 범위 제한하여 충돌 방지
+      $(document).on("dragstart", "#nonMemberOrderModal .product-card", function(e) {
+        const id = $(this).data("id");
+        e.originalEvent.dataTransfer.setData("productId", id);
+        e.originalEvent.dataTransfer.setData("type", "product");
+      });
+      
+      // 주문 항목 드래그 시작
+      $(document).on("dragstart", ".order-item", function(e) {
+        const id = $(this).data("id");
+        e.originalEvent.dataTransfer.setData("productId", id);
+        e.originalEvent.dataTransfer.setData("type", "order");
+        $(this).addClass("dragging");
+      });
+      
+      // 드래그 종료
+      $(document).on("dragend", ".order-item", function() {
+        $(this).removeClass("dragging");
+      });
+      
+      // 주문 영역 드래그 오버/리브
+      this.$orderArea.on("dragover", e => {
+        e.preventDefault();
+        this.$orderArea.addClass("drag-over");
+      }).on("dragleave", () => {
+        this.$orderArea.removeClass("drag-over");
+      });
+      
+      // 주문 영역 드롭
+      this.$orderArea.on("drop", e => {
+        e.preventDefault();
+        this.$orderArea.removeClass("drag-over");
+        
+        const id = e.originalEvent.dataTransfer.getData("productId");
+        const type = e.originalEvent.dataTransfer.getData("type");
+        
+        // 주문 항목을 주문 영역에 드롭하면 무시
+        if (type === "order") return;
+        
+        const product = this.getProduct(id);
+        if (!product) return;
+        
+        // 이미 있는 상품인지 확인
+        const $existing = this.$orderList.find(`.order-item[data-id="${id}"]`);
+        
+        if ($existing.length > 0) {
+          // 수량 증가
+          const $input = $existing.find(".quantity-input");
+          $input.val(parseInt($input.val()) + 1).trigger("change");
+        } else {
+          // 새 주문 항목 추가
+          this.addOrderItem(product);
+        }
+      });
+      
+      // 모달 영역에 드롭 - 주문 항목 제거
+      $("body").on("dragover", e => {
+        e.preventDefault();
+      }).on("drop", e => {
+        e.preventDefault();
+        
+        // 주문 영역에 들어있지 않은 곳에 드롭할 경우
+        if (!$(e.target).closest("#orderArea").length) {
+          const id = e.originalEvent.dataTransfer.getData("productId");
+          const type = e.originalEvent.dataTransfer.getData("type");
+          
+          // 주문 항목만 삭제 가능
+          if (type === "order") {
+            this.removeOrderItem(id);
+          }
+        }
+      });
+    }
+    
+    // 주문 항목 추가
+    addOrderItem(product) {
+      // 최종 가격 계산
+      let price = product.price;
+      if (product.discountOption === 'percent') {
+        price = Math.round(price * (1 - product.discountValue));
+      } else if (product.discountOption === 'minus') {
+        price = price - product.discountValue;
+      }
+      
+      // 이미지 경로 수정
+      const imgPath = product.image.replace(/^\//, './resources/');
+      
+      // 주문 항목 추가
+      this.$orderList.append(`
+        <div class="order-item" draggable="true" data-id="${product.id}">
+          <div class="order-item-image">
+            <img src="${imgPath}" alt="${product.title}">
+          </div>
+          <div class="order-item-info">
+            <h4 class="order-item-title">${product.title}</h4>
             <div class="order-item-price">
-                <span class="price"></span>
+              <span class="price">${price.toLocaleString()}원</span>
             </div>
-        </div>
-        <div class="order-item-quantity">
+          </div>
+          <div class="order-item-quantity">
             <button class="decrease-quantity"><i class="fa fa-minus"></i></button>
             <input type="number" min="1" value="1" class="quantity-input">
             <button class="increase-quantity"><i class="fa fa-plus"></i></button>
+          </div>
+          <div class="order-item-total">
+            <span class="total-price">${price.toLocaleString()}원</span>
+          </div>
         </div>
-        <div class="order-item-total">
-            <span class="total-price"></span>
-        </div>
-    </div>
-</template>
+      `);
+      
+      // UI 업데이트
+      this.$emptyCart.hide();
+      this.$removeMsg.show();
+      this.$orderBtn.prop("disabled", false);
+      
+      this.updateTotals();
+    }
+    
+    // 주문 항목 제거
+    removeOrderItem(id) {
+      this.$orderList.find(`.order-item[data-id="${id}"]`).remove();
+      
+      if (this.$orderList.children().length === 0) {
+        this.$emptyCart.show();
+        this.$removeMsg.hide();
+        this.$orderBtn.prop("disabled", true);
+      }
+      
+      this.updateTotals();
+    }
+    
+    // 주문 금액 업데이트
+    updateTotals() {
+      let totalAmount = 0;
+      let shippingFee = 0;
+      
+      this.$orderList.find(".order-item").each((i, item) => {
+        // 각 항목의 가격 합산
+        const priceText = $(item).find(".total-price").text();
+        totalAmount += parseInt(priceText.replace(/[^\d]/g, ""));
+        
+        // 첫 항목의 배송비 사용
+        if (i === 0) {
+          const id = $(item).data("id");
+          const product = this.getProduct(id);
+          shippingFee = product ? product.shipPrice : 0;
+        }
+      });
+      
+      // UI 업데이트
+      this.$totalAmount.text(`${totalAmount.toLocaleString()}원`);
+      this.$shipping.text(`${shippingFee.toLocaleString()}원`);
+      this.$totalPayment.text(`${(totalAmount + shippingFee).toLocaleString()}원`);
+    }
+    
+    // 주문 처리
+    processOrder() {
+      // 주문 완료 알림 표시
+      $("#notificationMessage").text(`주문이 완료되었습니다. 주문번호: ${this.guestId}`);
+      $("#orderCompleteNotification").css("display", "block");
+      
+      // 3초 후 알림 숨김
+      setTimeout(() => {
+        $("#orderCompleteNotification").css("display", "none");
+      }, 3000);
+      
+      // 주문 초기화
+      this.$orderList.empty();
+      this.$emptyCart.show();
+      this.$removeMsg.hide();
+      this.updateTotals();
+      this.$orderBtn.prop("disabled", true);
+      
+      // 모달 닫기
+      this.$modal.css("display", "none");
+      
+      // 새 ID 생성
+      this.guestId = this.generateId(6);
+      $("#guestId").text(this.guestId);
+    }
+}
 
-<script src="./resources/js/jquery-3.4.1.min.js"></script>
-<script src="./resources/js/app.js"></script>
+// 비디오 제어를 위한 JavaScript 코드
+function initVideoPlayer() {
+    const video = document.getElementById('adVideo');
+    const playBtn = document.getElementById('playBtn');
+    const pauseBtn = document.getElementById('pauseBtn');
+    const stopBtn = document.getElementById('stopBtn');
+    const rewindBtn = document.getElementById('rewindBtn');
+    const forwardBtn = document.getElementById('forwardBtn');
+    const slowDownBtn = document.getElementById('slowDownBtn');
+    const normalSpeedBtn = document.getElementById('normalSpeedBtn');
+    const speedUpBtn = document.getElementById('speedUpBtn');
+    const loopBtn = document.getElementById('loopBtn');
+    const autoplayBtn = document.getElementById('autoplayBtn');
+    const showControlsBtn = document.getElementById('showControlsBtn');
+    const hideControlsBtn = document.getElementById('hideControlsBtn');
+    const videoControls = document.getElementById('videoControls');
+    
+    // 비디오 컨트롤 상태
+    let controlsVisible = true;
+    
+    // 초기 설정
+    video.playbackRate = 1.0;
+    updateSpeedDisplay();
+    pauseBtn.style.display = 'none';
+    
+    // 재생/일시정지 버튼 토글
+    function togglePlayPauseButtons() {
+        if (video.paused) {
+            playBtn.style.display = 'flex';
+            pauseBtn.style.display = 'none';
+        } else {
+            playBtn.style.display = 'none';
+            pauseBtn.style.display = 'flex';
+        }
+    }
+    
+    // 재생 속도 표시 업데이트
+    function updateSpeedDisplay() {
+        document.querySelector('.speed-value').textContent = video.playbackRate.toFixed(1) + 'x';
+    }
+    
+    // 토글 버튼 상태 변경
+    function toggleButton(button, active) {
+        button.dataset.active = active;
+    }
+    
+    // 영상 알림 표시
+    function showNotification(message, duration = 2000) {
+        const notification = document.createElement('div');
+        notification.className = 'video-notification';
+        notification.textContent = message;
+        document.querySelector('.video-wrapper').appendChild(notification);
+        
+        setTimeout(() => {
+            notification.remove();
+        }, duration);
+    }
+    
+    // 이벤트 리스너
+    playBtn.addEventListener('click', () => {
+        video.play();
+        togglePlayPauseButtons();
+    });
+    
+    pauseBtn.addEventListener('click', () => {
+        video.pause();
+        togglePlayPauseButtons();
+    });
+    
+    stopBtn.addEventListener('click', () => {
+        video.pause();
+        video.currentTime = 0;
+        togglePlayPauseButtons();
+    });
+    
+    rewindBtn.addEventListener('click', () => {
+        video.currentTime = Math.max(0, video.currentTime - 10);
+        showNotification('10초 되감기');
+    });
+    
+    forwardBtn.addEventListener('click', () => {
+        video.currentTime = Math.min(video.duration, video.currentTime + 10);
+        showNotification('10초 빨리감기');
+    });
+    
+    slowDownBtn.addEventListener('click', () => {
+        video.playbackRate = Math.max(0.1, video.playbackRate - 0.1);
+        updateSpeedDisplay();
+        showNotification(`재생 속도: ${video.playbackRate.toFixed(1)}x`);
+    });
+    
+    normalSpeedBtn.addEventListener('click', () => {
+        video.playbackRate = 1.0;
+        updateSpeedDisplay();
+        showNotification('기본 속도로 복원');
+    });
+    
+    speedUpBtn.addEventListener('click', () => {
+        video.playbackRate = Math.min(2.0, video.playbackRate + 0.1);
+        updateSpeedDisplay();
+        showNotification(`재생 속도: ${video.playbackRate.toFixed(1)}x`);
+    });
+    
+    loopBtn.addEventListener('click', () => {
+        video.loop = !video.loop;
+        toggleButton(loopBtn, video.loop);
+        showNotification(video.loop ? '반복 재생 켜짐' : '반복 재생 꺼짐');
+    });
+    
+    autoplayBtn.addEventListener('click', () => {
+        video.autoplay = !video.autoplay;
+        toggleButton(autoplayBtn, video.autoplay);
+        showNotification(video.autoplay ? '자동 재생 켜짐' : '자동 재생 꺼짐');
+    });
+    
+    // 컨트롤러 보이기/숨기기
+    showControlsBtn.addEventListener('click', () => {
+        videoControls.classList.remove('hidden');
+        controlsVisible = true;
+        showControlsBtn.classList.remove('visible');
+    });
+    
+    hideControlsBtn.addEventListener('click', () => {
+        videoControls.classList.add('hidden');
+        controlsVisible = false;
+        showControlsBtn.classList.add('visible');
+    });
+    
+    // 비디오 이벤트
+    video.addEventListener('play', togglePlayPauseButtons);
+    video.addEventListener('pause', togglePlayPauseButtons);
+    video.addEventListener('ended', () => {
+        if (!video.loop) {
+            togglePlayPauseButtons();
+        }
+    });
+    
+    // 비디오 영역 클릭 시 재생/일시정지 토글
+    video.addEventListener('click', () => {
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    });
+}
+
+// 페이지 로드 시 초기화
+$(document).ready(function() {
+    // 비회원 주문 시스템 초기화
+    new NonMemberOrderSystem();
+    
+    // 비디오 플레이어 초기화
+    initVideoPlayer();
+});
+</script>
