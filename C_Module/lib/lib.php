@@ -4,12 +4,11 @@ namespace LIB\App;
 
 class Lib
 {
-    public static function redirect(string $url, string $msg = "")
+    public static function redirect( $url, $msg = "")
     {
-        session()->set("msg", $msg);
-        header("location: {$url}");
-
-        exit;
+        echo "<script>alert('".$msg."')</script>";
+        echo "<script>window.location.href='".$url."'</script>";
+        return;
     }
 
     public static function back(string $msg = "")

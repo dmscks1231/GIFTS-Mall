@@ -1,6 +1,31 @@
 <?php
 // 헤더 포함
 require_once "./util/header.php";
+
+// 공지사항 처리 파일 포함
+require_once './process/notices_process.php';
+
+// 페이지 파라미터 가져오기
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$category = isset($_GET['category']) ? $_GET['category'] : 'all';
+$sort = isset($_GET['sort']) ? $_GET['sort'] : 'desc';
+
+// 페이지 유효성 검사
+if ($page < 1) $page = 1;
+
+// 공지사항 가져오기
+$noticesData = LIB\App\getNotices($page, $category, $sort);
+$notices = $noticesData['notices'];
+$totalPages = $noticesData['totalPages'];
+$currentPage = $noticesData['currentPage'];
+$totalNotices = $noticesData['totalNotices'];
+
+// 이전, 다음 페이지 계산
+$prevPage = ($currentPage > 1) ? $currentPage - 1 : 1;
+$nextPage = ($currentPage < $totalPages) ? $currentPage + 1 : $totalPages;
+
+// 최신 주요 공지사항 가져오기
+$latestNotice = LIB\App\DB::fetch("SELECT * FROM notices WHERE category = '일반' ORDER BY date DESC LIMIT 1");
 ?>
 
     <!-- 비주얼 슬라이더 영역 시작 -->
@@ -94,8 +119,8 @@ require_once "./util/header.php";
         </div>
     </div>
 
-    <!-- 판매상품 섹션 시작 -->
-    <section class="products-section">
+   <!-- 판매상품 섹션 시작 -->
+   <section class="products-section">
         <!-- 더 눈에 띄는 배경 도형 요소 -->
         <div class="dynamic-background">
             <!-- 큰 도형 요소들 -->
@@ -251,28 +276,478 @@ require_once "./util/header.php";
 
                     <!-- 디지털/가전 카테고리 -->
                     <div class="product-category" id="digital">
-                        <!-- 디지털/가전 제품 내용 -->
+                        <div class="category-header">
+                            <a href="#" class="view-all">전체보기 <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- 상품 1 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/디지털/1.PNG" alt="PANTONE PD충전 보조배터리" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">보조배터리</div>
+                                    <h4 class="product-title">PANTONE PD충전 보조배터리</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">24,400원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>(29)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        230g의 가벼운 무게로 휴대성 극대화, 3way 빌트인 케이블 채용, 10,000mAh
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 2 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/디지털/2.PNG" alt="Bowie D05 무선 블루투스 헤드셋" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">헤드셋</div>
+                                    <h4 class="product-title">Bowie D05 무선 블루투스 5.3 헤드셋</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">36,900원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <span>(54)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        현실같은 3D사운드 스테이지 제공, 70시간의 오디오 재생시간, 2시간 급속 충전
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 3 -->
+                            <div class="product-card">
+                                <div class="product-badge hot">HOT</div>
+                                <div class="product-thumb">
+                                    <img src="./resources/images/디지털/3.PNG" alt="독거미 F99 기계식 키보드" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">키보드</div>
+                                    <h4 class="product-title">독거미 F99 기계식 키보드</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">70,750원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <span>(112)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        최고의 퍼포먼스를 경험하게 해주는 키보드, 안정적인 무선 전송, 저소음 디자인
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- 주얼리/액세서리 카테고리 -->
                     <div class="product-category" id="accessories">
-                        <!-- 주얼리/액세서리 제품 내용 -->
+                        <div class="category-header">
+                            <a href="#" class="view-all">전체보기 <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- 상품 1 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/팬시/1.PNG" alt="명품 자동 장우산" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">우산</div>
+                                    <h4 class="product-title">명품 자동 장우산</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">31,600원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <span>(18)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        태풍에도 견디는 프리미엄 우드 장우산. 50개 이상 구매 시 손잡이 무료 각인
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 2 -->
+                            <div class="product-card">
+                                <div class="product-badge custom">주문제작</div>
+                                <div class="product-thumb">
+                                    <img src="./resources/images/팬시/2.PNG" alt="14K 윙블링 원터치 링 귀걸이" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">귀걸이</div>
+                                    <h4 class="product-title">14K 윙블링 원터치 링 귀걸이</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">250,000원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <span>(36)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        언제나 당신의 일상에 '편안한 멋' 평범한 순간마저 매력을 돋보이게 만들어 줄 14K 컬렉션
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 3 -->
+                            <div class="product-card">
+                                <div class="product-badge custom">주문제작</div>
+                                <div class="product-thumb">
+                                    <img src="./resources/images/팬시/3.PNG" alt="14K 윙블링 메르시 목걸이" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">목걸이</div>
+                                    <h4 class="product-title">14K 윙블링 메르시 목걸이</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">265,000원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <span>(28)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        언제나 변함없고 고급스러운 전체 14K 골드로 제작되어 소장 가치뿐만 아니라 우아한 아름다움
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- 향수/화장품 카테고리 -->
                     <div class="product-category" id="fragrance">
-                        <!-- 향수/화장품 제품 내용 -->
+                        <div class="category-header">
+                            <a href="#" class="view-all">전체보기 <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- 상품 1 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/향수/1.PNG" alt="에스쁘아 솔리드 퍼퓸" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">고체향수</div>
+                                    <h4 class="product-title">에스쁘아 솔리드 퍼퓸 4.2g</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">26,000원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>(42)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        새벽 달빛 아래 달큰한 체리가 어지럽게 흩어진 자리, 새하얀 자스민이 코끝에 느껴지는 향기
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 2 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/향수/2.PNG" alt="호텔도슨 향수 오드퍼퓸" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">향수</div>
+                                    <h4 class="product-title">호텔도슨 향수 오드퍼퓸 75ml</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">153,000원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <span>(67)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        향긋하고 보드라운 마른 꽃과 나무 향 뒤로 낙엽이 타는 듯한 베티버 향이 퍼지는 우아한 향수
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 3 -->
+                            <div class="product-card">
+                                <div class="product-badge sale">SALE</div>
+                                <div class="product-thumb">
+                                    <img src="./resources/images/향수/4.PNG" alt="몽블랑 익스플로러 EDP" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">향수</div>
+                                    <h4 class="product-title">몽블랑 익스플로러 EDP 60ml</h4>
+                                    <div class="product-price">
+                                        <span class="old-price">103,000원</span>
+                                        <span class="current-price">93,000원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-half-o"></i>
+                                        <span>(52)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        전 세계를 여행하는 탐험가의 향기. 에너제틱 베르가못에서 자연스러운 패출리와 코코아 노트
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- 헤어케어 카테고리 -->
                     <div class="product-category" id="haircare">
-                        <!-- 헤어케어 제품 내용 -->
+                        <div class="category-header">
+                            <a href="#" class="view-all">전체보기 <i class="fa fa-angle-right"></i></a>
+                        </div>
+                        <div class="product-grid">
+                            <!-- 상품 1 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/헤어케어/1.PNG" alt="어노브 딥 데미지 트리트먼트" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">트리트먼트</div>
+                                    <h4 class="product-title">어노브 딥 데미지 트리트먼트 EX 더블</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">29,800원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <span>(97)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        부드러움에 집착하다! 어노브 집착 헤어팩! 단백질 3,000% UP으로 완성하는 머릿결
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 2 -->
+                            <div class="product-card">
+                                <div class="product-thumb">
+                                    <img src="./resources/images/헤어케어/2.PNG" alt="려루트젠여성맞춤볼륨탈모증상케어샴퓨353ml" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">트리트먼트</div>
+                                    <h4 class="product-title">려루트젠여성맞춤볼륨탈모증상케어샴퓨353ml</h4>
+                                    <div class="product-price">
+                                        <span class="current-price">21,900원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <span>(27)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        근거있는여성탈모전문가려루트젠이만든촘촘탄탄밀도탄력을채우는
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 상품 3 -->
+                            <div class="product-card">
+                                <div class="product-badge sale">SALE</div>
+                                <div class="product-thumb">
+                                    <img src="./resources/images/헤어케어/5.PNG" alt="닥터포헤어 피토프레시 헤어쿨링 스프레이" />
+                                    <div class="product-wishlist">
+                                        <i class="fa fa-heart-o"></i>
+                                    </div>
+                                    <div class="product-action">
+                                        <a href="#" class="quick-view"><i class="fa fa-search"></i></a>
+                                        <a href="#" class="add-to-cart"><i class="fa fa-shopping-cart"></i></a>
+                                    </div>
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-category">헤어스프레이</div>
+                                    <h4 class="product-title">닥터포헤어 피토프레시 헤어쿨링 스프레이</h4>
+                                    <div class="product-price">
+                                        <span class="old-price">16,000원</span>
+                                        <span class="current-price">14,400원</span>
+                                    </div>
+                                    <div class="product-rating">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star-o"></i>
+                                        <span>(46)</span>
+                                    </div>
+                                    <div class="product-description">
+                                        열받아 예민해진 두피를 위한 즉각적인 두피 쿨링 솔루션. 온종일 느껴지는 시원함
+                                    </div>
+                                    <div class="product-benefits">
+                                        <span><i class="fa fa-truck"></i> 무료배송</span>
+                                        <span><i class="fa fa-credit-card"></i> 10% 할인</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
     <!-- 공지사항 섹션 시작 -->
     <section class="notice-section">
         <div class="container">
@@ -288,16 +763,29 @@ require_once "./util/header.php";
                         <h3>주요 공지사항</h3>
                         <span class="accent-line"></span>
                     </div>
+                    <?php if ($latestNotice): ?>
                     <div class="highlight-content">
                         <div class="highlight-icon">
                             <i class="fa fa-bullhorn"></i>
                         </div>
                         <div class="highlight-text">
-                            <h4>8/14(수)~8/15(목) 택배사 휴무 안내</h4>
-                            <p>광복절 연휴로 인한 택배사 휴무로 배송이 지연될 수 있습니다. 양해 부탁드립니다.</p>
-                            <div class="highlight-date">2024.08.06</div>
+                            <h4><?= $latestNotice->content ?></h4>
+                            <p><?= $latestNotice->content ?></p>
+                            <div class="highlight-date"><?= date('Y.m.d', strtotime($latestNotice->date)) ?></div>
                         </div>
                     </div>
+                    <?php else: ?>
+                    <div class="highlight-content">
+                        <div class="highlight-icon">
+                            <i class="fa fa-bullhorn"></i>
+                        </div>
+                        <div class="highlight-text">
+                            <h4>공지사항이 없습니다</h4>
+                            <p>새로운 공지사항이 등록되면 이곳에 표시됩니다.</p>
+                            <div class="highlight-date"><?= date('Y.m.d') ?></div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
                     <div class="highlight-footer">
                         <div class="highlight-items">
                             <div class="item active"></div>
@@ -309,15 +797,33 @@ require_once "./util/header.php";
 
                 <!-- 오른쪽 공지사항 목록 -->
                 <div class="notice-container">
+                    <!-- 필터 및 정렬 컨트롤 -->
+                    <div class="notice-filters">
+                        <div class="category-filter">
+                            <a href="?category=all&sort=<?= $sort ?>" class="<?= $category === 'all' ? 'active' : '' ?>">전체</a>
+                            <a href="?category=일반&sort=<?= $sort ?>" class="<?= $category === '일반' ? 'active' : '' ?>">일반</a>
+                            <a href="?category=이벤트&sort=<?= $sort ?>" class="<?= $category === '이벤트' ? 'active' : '' ?>">이벤트</a>
+                        </div>
+                        <div class="sort-control">
+                            <a href="?category=<?= $category ?>&sort=desc" class="<?= $sort === 'desc' ? 'active' : '' ?>">최신순</a>
+                            <span>|</span>
+                            <a href="?category=<?= $category ?>&sort=asc" class="<?= $sort === 'asc' ? 'active' : '' ?>">오래된순</a>
+                        </div>
+                    </div>
+                    
                     <!-- 페이지 정보 및 네비게이션 -->
                     <div class="notice-navigation">
                         <div class="page-info">
-                            <div class="total-count">총 <strong>31</strong>건</div>
-                            <span class="page-indicator">1 / 6 페이지</span>
+                            <div class="total-count">총 <strong><?= $totalNotices ?></strong>건</div>
+                            <span class="page-indicator"><?= $currentPage ?> / <?= $totalPages ?> 페이지</span>
                         </div>
                         <div class="page-controls">
-                            <button class="nav-btn prev-btn" disabled><i class="fa fa-angle-left"></i></button>
-                            <button class="nav-btn next-btn"><i class="fa fa-angle-right"></i></button>
+                            <a href="?page=<?= $prevPage ?>&category=<?= $category ?>&sort=<?= $sort ?>" class="nav-btn prev-btn <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a href="?page=<?= $nextPage ?>&category=<?= $category ?>&sort=<?= $sort ?>" class="nav-btn next-btn <?= $currentPage >= $totalPages ? 'disabled' : '' ?>">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
                         </div>
                     </div>
 
@@ -332,82 +838,285 @@ require_once "./util/header.php";
 
                         <!-- 공지사항 항목들 -->
                         <div class="notice-items">
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge event">이벤트</span>
+                            <?php if (count($notices) > 0): ?>
+                                <?php foreach ($notices as $notice): ?>
+                                    <?php 
+                                        // 최신 공지사항 표시 (7일 이내)
+                                        $isNew = (strtotime($notice->date) > strtotime('-7 days'));
+                                    ?>
+                                    <div class="notice-item">
+                                        <div class="notice-type">
+                                            <span class="type-badge <?= $notice->category === '이벤트' ? 'event' : 'normal' ?>">
+                                                <?= $notice->category ?>
+                                            </span>
+                                        </div>
+                                        <div class="notice-title">
+                                            <a href="#"><?= $notice->content ?></a>
+                                            <?php if ($isNew): ?>
+                                                <span class="new-tag">N</span>
+                                            <?php endif; ?>
+                                        </div>
+                                        <div class="notice-date"><?= date('Y.m.d', strtotime($notice->date)) ?></div>
+                                    </div>
+                                <?php endforeach; ?>
+                            <?php else: ?>
+                                <div class="notice-item no-data">
+                                    <div class="notice-title text-center">
+                                        <span>해당 공지사항이 없습니다.</span>
+                                    </div>
                                 </div>
-                                <div class="notice-title">
-                                    <a href="#">24년 7월 &lt;헬스+출석체크인&gt; 이벤트 당첨자 공지</a>
-                                    <span class="new-tag">N</span>
-                                </div>
-                                <div class="notice-date">2024.08.08</div>
-                            </div>
-
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge event">이벤트</span>
-                                </div>
-                                <div class="notice-title">
-                                    <a href="#">7월 [기프트몰TV 보러갈래?] 이벤트 당첨자 발표</a>
-                                    <span class="new-tag">N</span>
-                                </div>
-                                <div class="notice-date">2024.08.07</div>
-                            </div>
-
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge normal">일반</span>
-                                </div>
-                                <div class="notice-title">
-                                    <a href="#">[배송안내] 8/14(수)~8/15(목) 택배사 휴무 관련</a>
-                                    <span class="new-tag">N</span>
-                                </div>
-                                <div class="notice-date">2024.08.06</div>
-                            </div>
-
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge normal">일반</span>
-                                </div>
-                                <div class="notice-title">
-                                    <a href="#">딘토 이벤트 조기 종료 안내</a>
-                                </div>
-                                <div class="notice-date">2024.08.05</div>
-                            </div>
-
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge normal">일반</span>
-                                </div>
-                                <div class="notice-title">
-                                    <a href="#">하월곡점 폐점으로 인한 영업종료 안내</a>
-                                </div>
-                                <div class="notice-date">2024.07.31</div>
-                            </div>
-
-                            <div class="notice-item">
-                                <div class="notice-type">
-                                    <span class="type-badge normal">일반</span>
-                                </div>
-                                <div class="notice-title">
-                                    <a href="#">양평점 리로케이션으로 인한 영업 중단 안내</a>
-                                </div>
-                                <div class="notice-date">2024.07.31</div>
-                            </div>
+                            <?php endif; ?>
                         </div>
                     </div>
 
                     <!-- 모바일 페이지 컨트롤 (작은 화면에서만 표시) -->
                     <div class="mobile-page-controls">
-                        <button class="nav-btn prev-btn" disabled><i class="fa fa-angle-left"></i> 이전</button>
-                        <span class="page-indicator">1 / 5 페이지</span>
-                        <button class="nav-btn next-btn">다음 <i class="fa fa-angle-right"></i></button>
+                        <a href="?page=<?= $prevPage ?>&category=<?= $category ?>&sort=<?= $sort ?>" class="nav-btn prev-btn <?= $currentPage <= 1 ? 'disabled' : '' ?>">
+                            <i class="fa fa-angle-left"></i> 이전
+                        </a>
+                        <span class="page-indicator"><?= $currentPage ?> / <?= $totalPages ?> 페이지</span>
+                        <a href="?page=<?= $nextPage ?>&category=<?= $category ?>&sort=<?= $sort ?>" class="nav-btn next-btn <?= $currentPage >= $totalPages ? 'disabled' : '' ?>">
+                            다음 <i class="fa fa-angle-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    
+    <!-- 상품입점/제휴문의 섹션 시작 -->
+    <section class="partnership-section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">상품입점/제휴문의</h2>
+                <p class="section-subtitle">대한민국 No.1 GIFTS:Mall과 함께 할 WIN-WIN 파트너를 찾습니다.<br> 제휴사의 많은 지원을 기다립니다.</p>
+            </div>
+
+            <!-- 배너 컨테이너 -->
+            <div class="banner-container">
+                <!-- 상품입점/제휴문의 배너 -->
+                <a href="#" class="partnership-banner banner-partnership">
+                    <div class="banner-icon">
+                        <i class="fa fa-check-square-o"></i>
+                    </div>
+                    <div class="banner-content">
+                        <h3>상품입점/제휴문의</h3>
+                        <p>새로운 파트너십을 위한 입점 및 제휴 문의를 시작하세요</p>
+                        <span class="banner-button">바로가기 <i class="fa fa-long-arrow-right"></i></span>
+                    </div>
+                    <div class="pattern-dot"></div>
+                </a>
+
+                <!-- 문의결과조회 배너 -->
+                <a href="#" class="partnership-banner banner-inquiry">
+                    <div class="banner-icon">
+                        <i class="fa fa-search"></i>
+                    </div>
+                    <div class="banner-content">
+                        <h3>문의결과조회</h3>
+                        <p>상담 신청 후 처리 상태 및 결과를 확인하실 수 있습니다</p>
+                        <span class="banner-button">조회하기 <i class="fa fa-long-arrow-right"></i></span>
+                    </div>
+                    <div class="pattern-dot"></div>
+                </a>
+
+                <!-- 전자계약시스템 배너 -->
+                <a href="#" class="partnership-banner banner-contract">
+                    <div class="banner-icon">
+                        <i class="fa fa-file-text-o"></i>
+                    </div>
+                    <div class="banner-content">
+                        <h3>전자계약시스템</h3>
+                        <p>편리한 온라인 계약 시스템으로 빠르게 절차를 진행하세요</p>
+                        <span class="banner-button">계약하기 <i class="fa fa-long-arrow-right"></i></span>
+                    </div>
+                    <div class="pattern-dot"></div>
+                </a>
+
+                <!-- 파트너시스템 배너 -->
+                <a href="#" class="partnership-banner banner-system">
+                    <div class="banner-icon">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <div class="banner-content">
+                        <h3>파트너시스템</h3>
+                        <p>입점 파트너를 위한 전용 관리 시스템에 접속하세요</p>
+                        <span class="banner-button">시스템접속 <i class="fa fa-long-arrow-right"></i></span>
+                    </div>
+                    <div class="pattern-dot"></div>
+                </a>
+            </div>
+
+            <!-- 입점 절차 안내 -->
+            <div class="process-container">
+                <h3 class="process-title">입점 절차 안내</h3>
+
+                <div class="process-timeline">
+                    <!-- 1단계 -->
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-user-plus"></i>
+                            </div>
+                            <h4>임시회원가입</h4>
+                            <p>미거래 업체는 임시회원<br> 가입 후 상담 신청</p>
+                        </div>
+                    </div>
+
+                    <!-- 2단계 -->
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-comments"></i>
+                            </div>
+                            <h4>온라인상담</h4>
+                            <p>입점/제휴를 위한 <br>온라인 상담 진행</p>
+                        </div>
+                    </div>
+
+                    <!-- 3단계 -->
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-building"></i>
+                            </div>
+                            <h4>방문상담</h4>
+                            <p>담당MD/제휴담당자와<br> 구체적 상담</p>
+                        </div>
+                    </div>
+
+                    <!-- 4단계 -->
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-thumbs-up"></i>
+                            </div>
+                            <h4>품평회</h4>
+                            <p>상품력, 기획력 등<br> 내부 품평회 진행</p>
+                        </div>
+                    </div>
+
+                    <!-- 5단계 -->
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-check-circle"></i>
+                            </div>
+                            <h4>신용평가</h4>
+                            <p>신뢰있는 거래를 <br>위한 업체 신용평가</p>
+                        </div>
+                    </div>
+
+                    <!-- 6단계 -->
+                    <div class="process-step">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <div class="step-icon">
+                                <i class="fa fa-handshake-o"></i>
+                            </div>
+                            <h4>계약체결</h4>
+                            <p>전자계약서 작성으로<br> 입점절차 완료</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <!-- 상품입점/제휴문의 섹션 끝 -->
+    <style>
+        /* 로딩 화면 숨김 */
+        .loading-overlay {
+            display: none;
+        }
+        
+        /* 공지사항 필터 및 정렬 스타일 */
+        .notice-filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .category-filter a {
+            display: inline-block;
+            padding: 5px 15px;
+            margin-right: 5px;
+            color: #666;
+            text-decoration: none;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter a.active {
+            background-color: #007bff;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .sort-control {
+            display: flex;
+            align-items: center;
+        }
+        
+        .sort-control a {
+            padding: 5px 10px;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-control a.active {
+            color: #007bff;
+            font-weight: bold;
+        }
+        
+        .sort-control span {
+            color: #ddd;
+            margin: 0 5px;
+        }
+        
+        .nav-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #f8f9fa;
+            color: #333;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover:not(.disabled) {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .notice-item.no-data {
+            padding: 30px 0;
+            color: #999;
+        }
+        
+        .text-center {
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+    <script src="./resources/js/jquery-3.4.1.min.js"></script>
+    <script src="./resources/js/data.js"></script>
 <?php
 // 푸터 포함
 require_once "./util/footer.php";

@@ -8,8 +8,8 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 // DB 클래스와 Lib 클래스 로드
-require_once 'DB.php';
-require_once 'Lib.php';
+require_once './lib/DB.php';
+require_once './lib/lib.php';
 
 // 초기 변수 설정
 $data = [
@@ -42,14 +42,14 @@ if (isset($_POST['login'])) {
             $_SESSION['username'] = $user->username;
             
             // 메시지 설정 및 리다이렉트
-            $_SESSION['msg'] = '로그인 성공!';
-            header('Location: ' . $_SERVER['PHP_SELF']);
+            Lib::redirect("./index.php", "로그인 성공");
             exit;
         }
     }
     
-    // 로그인 실패
-    $data['login_error'] = '아이디 또는 비밀번호가 일치하지 않습니다.';
+    // 로그인 실패 - alert 창으로 처리
+    Lib::back("아이디 또는 비밀번호가 일치하지 않습니다.");
+    exit;
 }
 
 // 회원가입 처리
@@ -60,13 +60,17 @@ if (isset($_POST['register'])) {
     $username = $_POST['register_username'] ?? '';
     
     if (empty($id) || empty($password) || empty($email) || empty($username)) {
-        $data['register_error'] = '모든 필드를 입력해주세요.';
+        // 필드 누락 - alert 창으로 처리
+        Lib::back("모든 필드를 입력해주세요.");
+        exit;
     } else {
         // 중복 확인
         $existingUser = DB::fetch("SELECT * FROM users WHERE id = ?", [$id]);
         
         if ($existingUser) {
-            $data['register_error'] = '이미 존재하는 아이디입니다.';
+            // 중복 아이디 - alert 창으로 처리
+            Lib::back("이미 존재하는 아이디입니다.");
+            exit;
         } else {
             // 솔트 생성 및 비밀번호 해싱
             $salt = Lib::createSalt();
@@ -87,11 +91,12 @@ if (isset($_POST['register'])) {
                 $_SESSION['username'] = $username;
                 
                 // 메시지 설정 및 리다이렉트
-                $_SESSION['msg'] = '회원가입 성공!';
-                header('Location: ' . $_SERVER['PHP_SELF']);
+                Lib::redirect($_SERVER['PHP_SELF'], "회원가입 성공!");
                 exit;
             } else {
-                $data['register_error'] = '회원가입에 실패했습니다.';
+                // 회원가입 실패 - alert 창으로 처리
+                Lib::back("회원가입에 실패했습니다.");
+                exit;
             }
         }
     }
@@ -100,7 +105,7 @@ if (isset($_POST['register'])) {
 // 로그아웃 처리
 if (isset($_GET['logout'])) {
     session_destroy();
-    header('Location: index.php');
+    Lib::redirect("index.php", "로그아웃 되었습니다.");
     exit;
 }
 
@@ -115,9 +120,8 @@ extract($data);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFTS:Mall</title>
     <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <!-- Bootstrap CSS (모달용) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         /* 로그인/회원가입 모달 스타일 */
         .modal-title {
@@ -215,24 +219,25 @@ extract($data);
             <!-- 내비게이션 메뉴 (드롭다운 체크박스 추가 및 유틸 메뉴 통합) -->
             <nav class="mobile-main-nav">
                 <ul>
-                    <li><a href="sub1.html">소개</a></li>
+                    <li><a href="sub1.php">소개</a></li>
                     <li class="drop">
                         <input type="checkbox" id="drop-toggle-1" class="drop-toggle" hidden>
                         <label for="drop-toggle-1" class="drop-label"></label>
-                        <a href="sub2.html" class="nav-item">판매상품</a>
+                        <a href="sub2.php" class="nav-item">판매상품</a>
                         <div class="drop-content">
-                            <a href="sub2.html" class="drop-item">
+                            <a href="sub2.php" class="drop-item">
                                 <i class="fa fa-th"></i>
                                 전체상품
                             </a>
-                            <a href="sub3.html" class="drop-item">
+                            <a href="sub3.php" class="drop-item">
                                 <i class="fa fa-fire"></i>
                                 인기상품
                             </a>
                         </div>
                     </li>
                     <li><a href="#">가맹점</a></li>
-                    <li><a href="sub4.html">장바구니</a></li>
+                    <li><a href="sub4.php">장바구니</a></li>
+                    
                 </ul>
 
                 <!-- 모바일용 유틸 메뉴 (모바일에서만 표시) -->
@@ -262,7 +267,7 @@ extract($data);
                             <span>회원가입</span>
                         </a>
                     <?php endif; ?>
-                    <a href="sub4.html">
+                    <a href="sub4.php">
                         <i class="fa fa-shopping-cart"></i>
                         <span>장바구니</span>
                     </a>
@@ -270,22 +275,38 @@ extract($data);
             </nav>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="sub1.html">소개</a></li>
+                    <li><a href="sub1.php">소개</a></li>
                     <li class="drop">
-                        <a href="sub2.html" class="nav-item">판매상품</a>
+                        <a href="sub2.php" class="nav-item">판매상품</a>
                         <div class="drop-content">
-                            <a href="sub2.html" class="drop-item">
+                            <a href="sub2.php" class="drop-item">
                                 <i class="fa fa-th"></i>
                                 전체상품
                             </a>
-                            <a href="sub3.html" class="drop-item">
+                            <a href="sub3.php" class="drop-item">
                                 <i class="fa fa-fire"></i>
                                 인기상품
                             </a>
                         </div>
                     </li>
                     <li><a href="#">가맹점</a></li>
-                    <li><a href="sub4.html">장바구니</a></li>
+                    <li><a href="sub4.php">장바구니</a></li>
+                    <?php if (Lib::isAdmin()): ?>
+                        <li class="drop">
+                        <a href="admin.php" class="nav-item">
+                        관리자</a>
+                        <div class="drop-content">
+                            <a href="sub2.php" class="drop-item">
+                                <i class="fa fa-th"></i>
+                                전체상품
+                            </a>
+                            <a href="sub3.php" class="drop-item">
+                                <i class="fa fa-fire"></i>
+                                인기상품
+                            </a>
+                        </div>
+                    </li>
+                    <?php endif; ?>
                 </ul>
             </nav>
             <!-- 유틸 메뉴 (PC용) -->
@@ -295,12 +316,7 @@ extract($data);
                         <i class="fa fa-user"></i>
                         <span><?= htmlspecialchars($_SESSION['username']) ?></span>
                     </a>
-                    <?php if (Lib::isAdmin()): ?>
-                        <a href="admin.php" class="util-item">
-                            <i class="fa fa-cog"></i>
-                            <span>관리자</span>
-                        </a>
-                    <?php endif; ?>
+                    
                     <a href="?logout=1" class="util-item">
                         <i class="fa fa-sign-out"></i>
                         <span>로그아웃</span>
@@ -315,10 +331,9 @@ extract($data);
                         <span>회원가입</span>
                     </a>
                 <?php endif; ?>
-                <a href="sub4.html" class="util-item cart-icon">
+                <a href="sub4.php" class="util-item cart-icon">
                     <i class="fa fa-shopping-cart"></i>
                     <span>장바구니</span>
-                    <span class="cart-count">0</span>
                 </a>
             </div>
         </div>
@@ -342,9 +357,6 @@ extract($data);
                             <label for="login_password" class="form-label">비밀번호</label>
                             <input type="password" class="form-control" id="login_password" name="login_password" required>
                         </div>
-                        <?php if (!empty($login_error)): ?>
-                            <div class="error-message"><?= htmlspecialchars($login_error) ?></div>
-                        <?php endif; ?>
                         <div class="d-grid gap-2">
                             <button type="submit" name="login" class="btn btn-primary">로그인</button>
                         </div>
@@ -383,9 +395,6 @@ extract($data);
                             <label for="register_email" class="form-label">이메일</label>
                             <input type="email" class="form-control" id="register_email" name="register_email" required>
                         </div>
-                        <?php if (!empty($register_error)): ?>
-                            <div class="error-message"><?= htmlspecialchars($register_error) ?></div>
-                        <?php endif; ?>
                         <div class="d-grid gap-2">
                             <button type="submit" name="register" class="btn btn-primary">회원가입</button>
                         </div>
