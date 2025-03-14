@@ -1,3 +1,6 @@
+/**
+ * 비회원 주문 시스템 JavaScript
+ */
 class NonMemberOrderSystem {
   constructor() {
     // DOM 요소
@@ -383,8 +386,11 @@ class NonMemberOrderSystem {
   
   // 주문 처리
   processOrder() {
+    // 총 결제 금액 가져오기
+    const totalPayment = this.$totalPayment.text().replace(/[^\d]/g, "");
+    
     // 주문 완료 알림 표시
-    $("#notificationMessage").text(`주문이 완료되었습니다. 주문번호: ${this.guestId}`);
+    $("#notificationMessage").text(`방금 비회원 ${this.guestId}님이 ${parseInt(totalPayment).toLocaleString()}원을 결제하셨습니다!`);
     $("#orderCompleteNotification").css("display", "block");
     
     // 3초 후 알림 숨김
