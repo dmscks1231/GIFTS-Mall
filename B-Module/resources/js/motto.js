@@ -12,24 +12,18 @@ $(document).ready(function() {
     $('.gallery-item').hover(
         function() {
             const hoverType = $(this).data('type');
+            console.log(hoverType);
             
             // 모든 캡션 숨기기
             $('.gallery-caption').css('opacity', '0');
+
+            // 현재 타입의 모토 캡션 표시
+            $(`.${hoverType}`).css('opacity', '1');
             
             // 현재 타입의 오버레이만 표시하고 나머지는 숨김
             $('.overlay-image').css('opacity', '0');
             $(`.${hoverType}-overlay`).css('opacity', '1');
             
-            // 모든 모토 콘텐츠 숨기기
-            $('.motto-content').css('opacity', '0').css('transform', 'translate(-50%, -55%)');
-            
-            // 호버된 아이템의 모토 콘텐츠만 표시
-            $(`.${hoverType}-content`).css('opacity', '1').css('transform', 'translate(-50%, -50%)');
-            
-            // 정보보안 아이템일 경우 추가 커서 아이콘 표시
-            if (hoverType === 'motto5') {
-                $('.cursor-icon').css('opacity', '1');
-            }
         },
         function() {
             // 호버 해제 시 모든 오버레이 숨김

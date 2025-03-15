@@ -156,7 +156,6 @@
             margin-bottom: 15px;
             position: relative;
             display: inline-block;
-            letter-spacing: -0.5px;
         }
 
         .motto-title::after {
@@ -190,7 +189,6 @@
         
         .gallery-item {
             position: relative;
-            flex: 1;
             height: 100%;
             overflow: hidden;
             cursor: pointer;
@@ -200,9 +198,7 @@
         }
         
         .gallery-item:hover {
-            transform: translateY(-5px);
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-            flex: 1.2;
         }
         
         .gallery-item img.main-image {
@@ -214,10 +210,6 @@
             transition: all 0.4s ease;
         }
         
-        .gallery-item:hover img.main-image {
-            transform: scale(1.05);
-        }
-        
         .gallery-caption {
             position: absolute;
             bottom: 20px;
@@ -227,7 +219,6 @@
             font-weight: bold;
             text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
             z-index: 20;
-            transition: opacity 0.4s ease;
         }
         
         /* 호버 효과를 위한 오버레이 이미지 */
@@ -263,67 +254,7 @@
         .gallery-item:nth-child(5) .overlay-image {
             left: -400%; /* 다섯 번째 부분 */
         }
-        
-        /* 호버 시 모토 설명 콘텐츠 */
-        .motto-content {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.4s ease, transform 0.4s ease;
-            text-align: center;
-            z-index: 30;
-            width: 80%;
-            background-color: rgba(0, 0, 0, 0.75);
-            padding: 25px;
-            border-radius: 8px;
-            transform-origin: center;
-            pointer-events: none;
-        }
-        
-        .motto-content .motto-title {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .motto-content .motto-title:after {
-            content: "";
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-            width: 40px;
-            height: 2px;
-            background-color: #e54980;
-        }
-        
-        .motto-content p {
-            margin: 15px 0 0;
-            font-size: 16px;
-            line-height: 1.6;
-            font-weight: 400;
-        }
-        
-        
-        .arrow-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 24px;
-            height: 24px;
-            background-color: #e54980;
-            border-radius: 50%;
-            color: white;
-            margin-left: 8px;
-            transition: transform 0.3s ease;
-        }
-        
+    
         /* 480px 이하 모바일 반응형 스타일 */
         @media (max-width: 480px) {
 
@@ -690,52 +621,31 @@
                 <!-- 행복신뢰 -->
                 <div class="gallery-item" data-type="motto1">
                     <img class="main-image" src="./resources/images/motto1.jpg" alt="행복신뢰">
-                    <div class="gallery-caption">행복신뢰</div>
-                    <div class="motto-content motto1-content">
-                        <div class="motto-title">행복신뢰</div>
-                        <p>고객신뢰를 바탕으로 행복한 사회를 추구하는 글로벌 기업</p>
-                    </div>
+                    <div class="gallery-caption motto1">행복신뢰</div>
                 </div>
                 
                 <!-- 가치나눔 -->
                 <div class="gallery-item" data-type="motto2">
                     <img class="main-image" src="./resources/images/motto2.jpg" alt="가치나눔">
-                    <div class="gallery-caption">가치나눔</div>
-                    <div class="motto-content motto2-content">
-                        <div class="motto-title">가치나눔</div>
-                        <p>기업의 가치 혁신의 출발은 나눔을 시작으로 고객 가치를 탐험한다.</p>
-                    </div>
+                    <div class="gallery-caption motto2">가치나눔</div>
                 </div>
                 
                 <!-- 환경선도 -->
                 <div class="gallery-item" data-type="motto3">
                     <img class="main-image" src="./resources/images/motto3.jpg" alt="환경선도">
-                    <div class="gallery-caption">환경선도</div>
-                    <div class="motto-content motto3-content">
-                        <div class="motto-title">환경선도</div>
-                        <p>세계 기후변화 대응을 위해 100% 재생에너지로 생산된 제품만 선별한다.</p>
-                    </div>
+                    <div class="gallery-caption motto3">환경선도</div>
                 </div>
                 
                 <!-- 미래혁신 -->
                 <div class="gallery-item" data-type="motto4">
                     <img class="main-image" src="./resources/images/motto4.jpg" alt="미래혁신">
-                    <div class="gallery-caption">미래혁신</div>
-                    <div class="motto-content motto4-content">
-                        <div class="motto-title">미래혁신</div>
-                        <p>다른 생각 다른 미래, 플랫폼 기반의 글로벌 미래 혁신을 선도한다.</p>
-                    </div>
+                    <div class="gallery-caption motto4">미래혁신</div>
                 </div>
                 
                 <!-- 정보보안 -->
                 <div class="gallery-item" data-type="motto5">
                     <img class="main-image" src="./resources/images/motto5.jpg" alt="정보보안">
-                    <div class="gallery-caption">정보보안</div>
-                    <div class="motto-content motto5-content">
-                        <div class="motto-title">정보보안</div>
-                        <p>글로벌 수준의 개인정보보호 및 보안 체계를 유지한다.</p>
-                    </div>
-                    <div class="cursor-icon">👆</div>
+                    <div class="gallery-caption motto5">정보보안</div>
                 </div>
             </div>
         </div>

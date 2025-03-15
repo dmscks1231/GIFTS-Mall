@@ -269,9 +269,8 @@ class NonMemberOrderSystem {
     
     // 시각적으로 비활성화 표시 (CSS 추가 필요)
     $product.css({
-      "opacity": "0.6",
-      "filter": "grayscale(100%)",
-      "pointer-events": "none"
+      "opacity": "0.5",
+      "user-select": "none"
     });
     
     // 장바구니 아이템 배열에 추가
