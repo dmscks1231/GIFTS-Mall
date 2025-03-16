@@ -296,9 +296,9 @@ extract($data);
                         <a href="admin.php" class="nav-item">
                         관리자</a>
                         <div class="drop-content">
-                            <a href="sub2.php" class="drop-item">
+                            <a href="admin_notices.php" class="drop-item">
                                 <i class="fa fa-th"></i>
-                                전체상품
+                                공지사항관리
                             </a>
                             <a href="sub3.php" class="drop-item">
                                 <i class="fa fa-fire"></i>

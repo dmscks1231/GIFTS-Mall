@@ -46,7 +46,7 @@ if ($existingItem) {
     );
     
     if ($result) {
-        Lib::redirect("../products.php", "장바구니에 상품 수량이 추가되었습니다.");
+        Lib::redirect("../sub4.php", "장바구니에 상품 수량이 추가되었습니다.");
     } else {
         Lib::back("장바구니 업데이트에 실패했습니다.");
     }
@@ -58,7 +58,7 @@ if ($existingItem) {
     );
     
     if ($result) {
-        Lib::redirect("../products.php", "장바구니에 상품이 추가되었습니다.");
+        Lib::redirect("../sub4.php", "장바구니에 상품이 추가되었습니다.");
     } else {
         Lib::back("장바구니에 상품 추가를 실패했습니다.");
     }
