@@ -35,8 +35,6 @@ if (Lib::isLoggedIn()) {
     // 전체 상품 금액과 할인 금액 계산
     $totalOriginalPrice = 0;
     $totalDiscountAmount = 0;
-    $shippingFee = 0; // 기본 배송비
-    $categories = []; // 카테고리별 배송비 한 번만 계산하기 위한 배열
     
     foreach ($cartItems as $item) {
         // 할인된 가격 계산
@@ -51,22 +49,15 @@ if (Lib::isLoggedIn()) {
         
         // 원래 가격 * 수량 누적
         $totalOriginalPrice += ($item->price * $item->count);
-        
-        // 카테고리별 배송비 계산 (같은 카테고리는 한 번만 계산)
-        if (!in_array($item->category, $categories)) {
-            $shippingFee += $item->shipPrice;
-            $categories[] = $item->category;
-        }
     }
     
-    // 최종 결제 금액
-    $totalPaymentAmount = $totalOriginalPrice - $totalDiscountAmount + $shippingFee;
+    // 최종 결제 금액 (배송비 제외)
+    $totalPaymentAmount = $totalOriginalPrice - $totalDiscountAmount;
 } else {
     // 비로그인 상태일 경우 빈 배열로 초기화
     $cartItems = [];
     $totalOriginalPrice = 0;
     $totalDiscountAmount = 0;
-    $shippingFee = 0;
     $totalPaymentAmount = 0;
 }
 ?>
@@ -568,7 +559,7 @@ if (Lib::isLoggedIn()) {
     <div class="container">
         <div class="cart-header">
             <h1 class="cart-title">장바구니</h1>
-            <a href="products.php" class="continue-shopping">
+            <a href="sub2.php" class="continue-shopping">
                 <i class="fa fa-arrow-left"></i> 계속 쇼핑하기
             </a>
         </div>
@@ -643,10 +634,6 @@ if (Lib::isLoggedIn()) {
                                 <span class="price"><?= number_format($totalOriginalPrice) ?>원</span>
                             </div>
                             <div class="summary-item">
-                                <span>배송비</span>
-                                <span class="price"><?= $shippingFee > 0 ? number_format($shippingFee).'원' : '무료' ?></span>
-                            </div>
-                            <div class="summary-item">
                                 <span>할인 금액</span>
                                 <span class="price">-<?= number_format($totalDiscountAmount) ?>원</span>
                             </div>
@@ -689,6 +676,8 @@ if (Lib::isLoggedIn()) {
     </div>
 </section>
 
+<!-- 수량 업데이트 처리 스크립트 파일 -->
+<script src="./resources/js/jquery-3.4.1.min.js"></script>
 <script>
 $(document).ready(function() {
     // 수량 조절 버튼 이벤트 처리
@@ -699,7 +688,7 @@ $(document).ready(function() {
         // AJAX 요청으로 수량 업데이트
         $.ajax({
             url: './process/update_cart_quantity.php',
-            type: 'GET',
+            type: 'GET', // 제공된 update_cart_quantity.php 파일이 GET 방식으로 작성되어 있음
             dataType: 'json',
             data: {
                 id: itemId,
@@ -715,7 +704,7 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 console.error('Error:', error);
-                alert('오류가 발생했습니다.');
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
             }
         });
     });
