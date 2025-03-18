@@ -223,7 +223,7 @@ class NonMemberOrderSystem {
       // 주문 항목을 주문 영역에 드롭하면 무시
       if (type === "order") return;
       
-      const product = this.getPr  oduct(id);
+      const product = this.getProduct(id);
       if (!product) return;
       
       // 이미 있는 상품인지 확인
