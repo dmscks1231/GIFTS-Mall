@@ -1,423 +1,326 @@
 
-/* 전체 페이지 스타일 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Noto Sans KR', sans-serif;
-}
+    /* 전체 페이지 스타일 */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Noto Sans KR', sans-serif;
+    }
 
-body {
-    background-color: #f9f9f9;
-    color: #333;
-    line-height: 1.6;
-}
+    body {
+        background-color: #f9f9f9;
+        color: #333;
+        line-height: 1.6;
+    }
 
-a {
-    text-decoration: none;
-    color: inherit;
-}
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
 
-ul {
-    list-style: none;
-}
-input[type=radio] {
-    display: none;
-}
-/* 비주얼 슬라이더 영역 스타일 */
-.visual-slider {
-    position: relative;
-    width: 100%;
-    height: 600px; /* 슬라이더 높이 증가 */
-    overflow: hidden;
-    margin-top: 80px; /* 헤더 높이만큼 여백 */
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
-}
+    ul {
+        list-style: none;
+    }
+    input[type=radio] {
+        display: none;
+    }
+    /* 비주얼 슬라이더 영역 스타일 */
+    .visual-slider {
+        position: relative;
+        width: 100%;
+        height: 600px; /* 슬라이더 높이 증가 */
+        overflow: hidden;
+        margin-top: 80px; /* 헤더 높이만큼 여백 */
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
+    }
 
-/* 슬라이더 컨테이너 스타일 */
-.slider-container {
-    display: flex;
-    width: 600%; /* 4개의 슬라이드 공간 (3개 원본 + 1개 복제) */
-    height: 100%;
-    position: relative;
-    animation: visual 9s infinite ease-in-out;
-}
+    /* 슬라이더 컨테이너 스타일 */
+    .slider-container {
+        display: flex;
+        width: 600%; /* 4개의 슬라이드 공간 (3개 원본 + 1개 복제) */
+        height: 100%;
+        position: relative;
+        animation: visual 9s infinite ease-in-out;
+    }
 
-#slide1:checked~.slider-container {
-    transform: translateX(0);
-    animation-delay: 1s;
-    animation: visual 9s infinite;
-}
+    #slide1:checked~.slider-container {
+        transform: translateX(0);
+        animation-delay: 1s;
+        animation: visual 9s infinite;
+    }
 
-#slide2:checked~.slider-container {
-    transform: translateX(-16.5%);
-    animation-delay: 1s;
-    animation: visual 9s infinite;
-}
+    #slide2:checked~.slider-container {
+        transform: translateX(-16.7%);
+        animation-delay: 1s;
+        animation: visual 9s infinite;
+    }
 
-#slide3:checked~.slider-container {
-    transform: translateX(-33%);
-    animation-delay: 1s;
-    animation: visual 9s infinite;
-}
+    #slide3:checked~.slider-container {
+        transform: translateX(-33.4%);
+        animation-delay: 1s;
+        animation: visual 9s infinite;
+    }
 
-.visual-slider:hover .slider-container {
-    animation-play-state: paused !important;
-}
-
-
-/* 각 슬라이드 스타일 */
-.slide {
-    width: 16.5%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-}
-
-/* 슬라이드 배경 이미지 */
-.slide-bg {
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-position: center;
-    transition: transform 8s cubic-bezier(0.165, 0.84, 0.44, 1); /* 배경 전환 효과 강화 */
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-}
-
-/* 슬라이드 배경 이미지 - 명시적 URL 유지 */
-.slide-bg-1 {
-    background-image: url('https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-color: #f9e0ea; /* 이미지 로드 전 배경색 */
-}
-
-/* 두 번째 슬라이드 배경 */
-.slide-bg-2 {
-    background-image: url('https://images.unsplash.com/photo-1607083206869-4c7672e72a8a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-color: #e0e9f9; /* 이미지 로드 전 배경색 */
-}
-
-/* 세 번째 슬라이드 배경 */
-.slide-bg-3 {
-    background-image: url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-color: #e0f9e5; /* 이미지 로드 전 배경색 */
-}
+    .visual-slider:hover .slider-container {
+        animation-play-state: paused !important;
+    }
 
 
-/* 세 번째 슬라이드 배경 */
-.slide-bg-4 {
-    background-image: url('https://images.unsplash.com/photo-1607083206968-13611e3d76db?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-    background-color: #e0f9e5; /* 이미지 로드 전 배경색 */
-}
+    /* 각 슬라이드 스타일 */
+    .slide {
+        width: 16.7%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+    }
 
-/* 슬라이드 오버레이 */
-.slide-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-        to right, 
-        rgba(0, 0, 0, 0.6) 0%, 
-        rgba(0, 0, 0, 0.4) 40%, 
-        rgba(0, 0, 0, 0.2) 100%
-    ); /* 그라데이션 변경 */
-    z-index: 2;
-}
+    /* 슬라이드 배경 이미지 */
+    .slide-bg {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        transition: transform 8s cubic-bezier(0.165, 0.84, 0.44, 1); /* 배경 전환 효과 강화 */
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
 
-/* 슬라이드 내용 스타일 */
-.slide-content {
-    position: absolute;
-    z-index: 3;
-    top: 50%;
-    left: 15%; /* 왼쪽에서 더 멀리 */
-    transform: translateY(-50%);
-    color: #fff;
-    max-width: 500px; /* 너비 조정 */
-    width: 75%;
-    padding: 50px 0; /* 패딩 증가 */
-}
+    /* 슬라이드 배경 이미지 - 명시적 URL 유지 */
+    .slide-bg-1 {
+        background-image: url("./resources/images/08.jpg");
+        background-color: #f9e0ea; /* 이미지 로드 전 배경색 */
+    }
 
-/* 슬라이드 태그 스타일 */
-.slide-tag {
-    display: inline-block;
-    background-color: rgba(229, 73, 128, 0.9);
-    color: white;
-    padding: 8px 16px; /* 패딩 증가 */
-    border-radius: 50px;
-    font-size: 14px; /* 폰트 크기 증가 */
-    font-weight: 600;
-    margin-bottom: 24px; /* 마진 증가 */
-    opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
-    transform: translateY(0); /* 오류 수정: 변형 제거 */
-    box-shadow: 0 5px 20px rgba(229, 73, 128, 0.4); /* 그림자 강화 */
-    letter-spacing: 1px; /* 자간 증가 */
-}
+    /* 두 번째 슬라이드 배경 */
+    .slide-bg-2 {
+        background-image: url("./resources/images/26.jpg");
+        background-color: #e0e9f9; /* 이미지 로드 전 배경색 */
+    }
 
-/* 슬라이드 제목 스타일 */
-.slide-title {
-    font-size: 48px; /* 폰트 크기 증가 */
-    font-weight: 800; /* 폰트 무게 증가 */
-    line-height: 1.1; /* 라인 높이 감소 */
-    margin-bottom: 20px;
-    opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
-    transform: translateY(0); /* 오류 수정: 변형 제거 */
-    color: #fff;
-    text-shadow: 0 5px 25px rgba(0, 0, 0, 0.4); /* 그림자 강화 */
-    letter-spacing: -0.5px;
-}
+    /* 세 번째 슬라이드 배경 */
+    .slide-bg-3 {
+        background-image: url("./resources/images/11.jpg");
+        background-color: #e0f9e5; /* 이미지 로드 전 배경색 */
+    }
 
-/* 슬라이드 부제목 스타일 */
-.slide-subtitle {
-    font-size: 18px; /* 폰트 크기 증가 */
-    line-height: 1.7; /* 라인 높이 증가 */
-    opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
-    transform: translateY(0); /* 오류 수정: 변형 제거 */
-    margin-bottom: 30px; /* 마진 증가 */
-    text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
-    font-weight: 400;
-    max-width: 90%;
-}
+    /* 슬라이드 오버레이 */
+    .slide-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            to right, 
+            rgba(0, 0, 0, 0.6) 0%, 
+            rgba(0, 0, 0, 0.4) 40%, 
+            rgba(0, 0, 0, 0.2) 100%
+        ); /* 그라데이션 변경 */
+        z-index: 2;
+    }
 
-/* 슬라이드 액션 버튼 컨테이너 */
-.slide-action {
-    display: flex;
-    gap: 16px; /* 간격 증가 */
-    opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
-    transform: translateY(0); /* 오류 수정: 변형 제거 */
-}
+    /* 슬라이드 내용 스타일 */
+    .slide-content {
+        position: absolute;
+        z-index: 3;
+        top: 50%;
+        left: 15%; /* 왼쪽에서 더 멀리 */
+        transform: translateY(-50%);
+        color: #fff;
+        max-width: 500px; /* 너비 조정 */
+        width: 75%;
+        padding: 50px 0; /* 패딩 증가 */
+    }
 
-/* 슬라이드 버튼 기본 스타일 */
-.slide-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 24px; /* 패딩 증가 */
-    border-radius: 50px;
-    font-size: 16px; /* 폰트 크기 증가 */
-    font-weight: 600;
-    transition: all 0.4s ease;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
-    cursor: pointer;
-}
+    /* 슬라이드 태그 스타일 */
+    .slide-tag {
+        display: inline-block;
+        background-color: rgba(229, 73, 128, 0.9);
+        color: white;
+        padding: 8px 16px; /* 패딩 증가 */
+        border-radius: 50px;
+        font-size: 14px; /* 폰트 크기 증가 */
+        font-weight: 600;
+        margin-bottom: 24px; /* 마진 증가 */
+        opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
+        transform: translateY(0); /* 오류 수정: 변형 제거 */
+        box-shadow: 0 5px 20px rgba(229, 73, 128, 0.4); /* 그림자 강화 */
+        letter-spacing: 1px; /* 자간 증가 */
+    }
 
-.slide-btn i {
-    margin-left: 8px;
-    transition: transform 0.3s ease;
-    font-size: 14px; /* 아이콘 크기 증가 */
-}
+    /* 슬라이드 제목 스타일 */
+    .slide-title {
+        font-size: 48px; /* 폰트 크기 증가 */
+        font-weight: 800; /* 폰트 무게 증가 */
+        line-height: 1.1; /* 라인 높이 감소 */
+        margin-bottom: 20px;
+        opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
+        transform: translateY(0); /* 오류 수정: 변형 제거 */
+        color: #fff;
+        text-shadow: 0 5px 25px rgba(0, 0, 0, 0.4); /* 그림자 강화 */
+        letter-spacing: -0.5px;
+    }
 
-.slide-btn:hover i {
-    transform: translateX(6px); /* 호버 효과 강화 */
-}
+    /* 슬라이드 부제목 스타일 */
+    .slide-subtitle {
+        font-size: 18px; /* 폰트 크기 증가 */
+        line-height: 1.7; /* 라인 높이 증가 */
+        opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
+        transform: translateY(0); /* 오류 수정: 변형 제거 */
+        margin-bottom: 30px; /* 마진 증가 */
+        text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3); /* 그림자 강화 */
+        font-weight: 400;
+        max-width: 90%;
+    }
 
-/* 기본 버튼 스타일 */
-.primary-btn {
-    background-color: #e54980;
-    color: white;
-    border: none;
-}
+    /* 슬라이드 액션 버튼 컨테이너 */
+    .slide-action {
+        display: flex;
+        gap: 16px; /* 간격 증가 */
+        opacity: 1; /* 오류 수정: 항상 보이도록 수정 */
+        transform: translateY(0); /* 오류 수정: 변형 제거 */
+    }
 
-.primary-btn:hover {
-    background-color: #d43a6e;
-    box-shadow: 0 8px 25px rgba(229, 73, 128, 0.5); /* 그림자 강화 */
-}
+    /* 슬라이드 버튼 기본 스타일 */
+    .slide-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 24px; /* 패딩 증가 */
+        border-radius: 50px;
+        font-size: 16px; /* 폰트 크기 증가 */
+        font-weight: 600;
+        transition: all 0.4s ease;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* 그림자 강화 */
+        cursor: pointer;
+    }
 
-/* 아웃라인 버튼 스타일 */
-.outline-btn {
-    background-color: transparent;
-    color: white;
-    border: 2px solid rgba(255, 255, 255, 0.9); /* 테두리 불투명도 증가 */
-}
+    .slide-btn i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+        font-size: 14px; /* 아이콘 크기 증가 */
+    }
 
-.outline-btn:hover {
-    background-color: rgba(255, 255, 255, 0.15); /* 호버 배경 불투명도 증가 */
-    border-color: white;
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25); /* 그림자 강화 */
-}
+    .slide-btn:hover i {
+        transform: translateX(6px); /* 호버 효과 강화 */
+    }
 
-/* 슬라이드 장식 아이콘 */
-.slide-decor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
-}
+    /* 기본 버튼 스타일 */
+    .primary-btn {
+        background-color: #e54980;
+        color: white;
+        border: none;
+    }
 
-.decor-icon {
-    position: absolute;
-    color: rgba(255, 255, 255, 0.2); /* 불투명도 증가 */
-    opacity: 0.8; /* 오류 수정: 기본적으로 보이도록 설정 */
-    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3)); /* 그림자 효과 추가 */
-}
+    .primary-btn:hover {
+        background-color: #d43a6e;
+        box-shadow: 0 8px 25px rgba(229, 73, 128, 0.5); /* 그림자 강화 */
+    }
 
-/* 각 아이콘 위치와 크기 설정 */
-.slide:nth-child(1) .decor-icon:nth-child(1) {
-    top: 20%;
-    right: 20%; /* 위치 조정 */
-    font-size: 48px; /* 크기 증가 */
-}
+    /* 아웃라인 버튼 스타일 */
+    .outline-btn {
+        background-color: transparent;
+        color: white;
+        border: 2px solid rgba(255, 255, 255, 0.9); /* 테두리 불투명도 증가 */
+    }
 
-.slide:nth-child(1) .decor-icon:nth-child(2) {
-    top: 35%;
-    right: 12%; /* 위치 조정 */
-    font-size: 32px; /* 크기 증가 */
-}
+    .outline-btn:hover {
+        background-color: rgba(255, 255, 255, 0.15); /* 호버 배경 불투명도 증가 */
+        border-color: white;
+        box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25); /* 그림자 강화 */
+    }
 
-.slide:nth-child(1) .decor-icon:nth-child(3) {
-    top: 60%;
-    right: 25%; /* 위치 조정 */
-    font-size: 40px; /* 크기 증가 */
-}
 
-.slide:nth-child(2) .decor-icon:nth-child(1) {
-    top: 25%;
-    right: 15%; /* 위치 조정 */
-    font-size: 44px; /* 크기 증가 */
-}
-
-.slide:nth-child(2) .decor-icon:nth-child(2) {
-    top: 50%;
-    right: 22%; /* 위치 조정 */
-    font-size: 36px; /* 크기 증가 */
-}
-
-.slide:nth-child(2) .decor-icon:nth-child(3) {
-    top: 70%;
-    right: 12%; /* 위치 조정 */
-    font-size: 28px; /* 크기 증가 */
-}
-
-.slide:nth-child(3) .decor-icon:nth-child(1) {
-    top: 20%;
-    right: 18%; /* 위치 조정 */
-    font-size: 38px; /* 크기 증가 */
-}
-
-.slide:nth-child(3) .decor-icon:nth-child(2) {
-    top: 45%;
-    right: 12%; /* 위치 조정 */
-    font-size: 42px; /* 크기 증가 */
-}
-
-.slide:nth-child(3) .decor-icon:nth-child(3) {
-    top: 65%;
-    right: 20%; /* 위치 조정 */
-    font-size: 32px; /* 크기 증가 */
-}
-
-/* 슬라이더 컨트롤 */
+    @keyframes visual {
+        0% {
+            left: 0;
+        }
+        30% {
+            left: 0;
+        }
+        33.33% {
+            left: -100%;
+        }
+        63.33% {
+            left: -100%;
+        }
+        66.66% {
+            left: -200%;
+        }
+        96.66% {
+            left: -200%;
+        }
+        100% {
+            left: -300%;
+        }
+        }
+  /* 라디오 버튼에 따른 슬라이더 컨트롤 스타일 */
 .slider-controls {
     position: absolute;
-    bottom: 50px; /* 위치 조정 */
-    left: 15%; /* 위치 조정 - 왼쪽으로 이동 */
-    transform: translateX(0); /* 중앙 정렬 제거 */
+    bottom: 50px;
+    left: 15%;
     z-index: 10;
     display: flex;
     align-items: center;
-    gap: 20px; /* 간격 증가 */
-    background-color: rgba(0, 0, 0, 0.25); /* 배경 불투명도 조정 */
-    backdrop-filter: blur(15px); /* 블러 효과 강화 */
-    padding: 12px 24px; /* 패딩 증가 */
+    gap: 12px;
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: 10px 20px;
     border-radius: 50px;
-    border: 1px solid rgba(255, 255, 255, 0.15); /* 테두리 조정 */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-/* 네비게이션 버튼 스타일 */
-.prev-btn, .next-btn {
-    background: rgba(255, 255, 255, 0.2); /* 배경 불투명도 증가 */
-    border: 1px solid rgba(255, 255, 255, 0.4); /* 테두리 불투명도 증가 */
-    width: 46px; /* 크기 증가 */
-    height: 46px; /* 크기 증가 */
+.slider-controls label {
+    position: relative;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 20px; /* 폰트 크기 증가 */
-    backdrop-filter: blur(5px);
-    transition: all 0.4s ease;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2); /* 그림자 강화 */
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-/* 버튼 호버 효과 */
-.prev-btn:hover, .next-btn:hover {
-    background: rgba(229, 73, 128, 0.8); /* 호버 배경 불투명도 증가 */
-    transform: scale(1.15); /* 호버 효과 강화 */
-}
-
-/* 슬라이드 인디케이터 컨테이너 */
-.slide-indicators {
-    display: flex;
-    gap: 18px; /* 간격 증가 */
-    align-items: center;
-}
-
-@keyframes visual {
-    0% {
-        left: 0;
-      }
-      30% {
-        left: 0;
-      }
-      33.33% {
-        left: -100%;
-      }
-      63.33% {
-        left: -100%;
-      }
-      66.66% {
-        left: -200%;
-      }
-      96.66% {
-        left: -200%;
-      }
-      100% {
-        left: -300%;
-      }
-    }
-
-/* 기본상태는 안보임 */
-.slider-controls label::before {
-    content: "◀";
+/* Hide all labels by default */
+.slider-controls label {
     display: none;
-    position: absolute;
-    top: 50%;
-    transform: translate(0, -50%);
 }
 
-/*  라디오가 체크 되면 해당 체크된 부분의 아이콘바꾸기  */
-#slide1:checked~.slider-controls label:nth-child(2)::before,
-#slide2:checked~.slider-controls label:nth-child(3)::before,
-#slide3:checked~.slider-controls label:nth-child(4)::before,
-#slide4:checked~.slider-controls label:nth-child(5)::before,
-#slide5:checked~.slider-controls label:nth-child(1)::before
- {
-    content: "▶";
-    left: 110%;
-    display: block;
-    font-size: 3rem;
-}
-
-#slide1:checked~.slider-controls label:nth-child(5)::before,
-#slide2:checked~.slider-controls label:nth-child(1)::before,
-#slide3:checked~.slider-controls label:nth-child(2)::before,
-#slide4:checked~.slider-controls label:nth-child(3)::before,
-#slide5:checked~.slider-controls label:nth-child(4)::before
+/* 슬라이드 선택에 따라 이전/다음 버튼만 표시 */
+#slide1:checked ~ .slider-controls label:nth-child(3),  /* 1번 슬라이드일 때 이전(3번) 버튼 */
+#slide1:checked ~ .slider-controls label:nth-child(2),  /* 1번 슬라이드일 때 다음(2번) 버튼 */
+#slide2:checked ~ .slider-controls label:nth-child(1),  /* 2번 슬라이드일 때 이전(1번) 버튼 */
+#slide2:checked ~ .slider-controls label:nth-child(3),  /* 2번 슬라이드일 때 다음(3번) 버튼 */
+#slide3:checked ~ .slider-controls label:nth-child(2),  /* 3번 슬라이드일 때 이전(2번) 버튼 */
+#slide3:checked ~ .slider-controls label:nth-child(1)  /* 3번 슬라이드일 때 다음(1번) 버튼 */
 {
-    content: "◀";
-    right: 110%;
-    font-size: 3rem;
-    display: block;
+    display: flex;
+}
+
+/* 다음 버튼 (오른쪽 화살표) */
+#slide1:checked ~ .slider-controls label:nth-child(2)::before,
+#slide2:checked ~ .slider-controls label:nth-child(3)::before,
+#slide3:checked ~ .slider-controls label:nth-child(1)::before {
+    content: "\f054"; /* 오른쪽 화살표 아이콘 */
+    font-family: 'FontAwesome';
+}
+
+/* 이전 버튼 (왼쪽 화살표) */
+#slide1:checked ~ .slider-controls label:nth-child(3)::before,
+#slide2:checked ~ .slider-controls label:nth-child(1)::before,
+#slide3:checked ~ .slider-controls label:nth-child(2)::before {
+    content: "\f053"; /* 왼쪽 화살표 아이콘 */
+    font-family: 'FontAwesome';
 }
