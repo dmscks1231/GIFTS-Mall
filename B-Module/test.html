@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>GIFTS:Mall</title>
     <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <!-- 비주얼 슬라이더 영역 시작 -->
+    <!-- 비주얼 슬라이더 영역 -->
     <div class="visual-slider">
         <input type="radio" name="slider" id="slide1" checked>
         <input type="radio" name="slider" id="slide2">
         <input type="radio" name="slider" id="slide3">
+        
         <!-- 슬라이더 컨테이너 -->
         <div class="slider-container">
-            <!-- 첫 번째 슬라이드 -->
+            <!-- 슬라이드 반복 (1-3번) -->
+            <!-- 슬라이드 1 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-1"></div>
                 <div class="slide-overlay"></div>
@@ -26,13 +26,13 @@
                     <h2 class="slide-title">Better Give & Take</h2>
                     <p class="slide-subtitle">옴니채널 플랫폼 GIFTS로 전 세계 고객에게 선물의 가치를 높입니다.</p>
                     <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">자세히 보기<i class="fa fa-arrow-right "></i></a>
+                        <a href="#" class="slide-btn primary-btn">자세히 보기<i class="fa fa-arrow-right"></i></a>
                         <a href="#" class="slide-btn outline-btn">선물하기 <i class="fa fa-gift"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- 두 번째 슬라이드 -->
+            <!-- 슬라이드 2 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-2"></div>
                 <div class="slide-overlay"></div>
@@ -47,7 +47,7 @@
                 </div>
             </div>
 
-            <!-- 세 번째 슬라이드 -->
+            <!-- 슬라이드 3 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-3"></div>
                 <div class="slide-overlay"></div>
@@ -61,7 +61,8 @@
                     </div>
                 </div>
             </div>
-            <!-- 첫 번째 슬라이드 -->
+            
+            <!-- 슬라이드 반복 (동일 슬라이드 1-3번 반복) -->
             <div class="slide">
                 <div class="slide-bg slide-bg-1"></div>
                 <div class="slide-overlay"></div>
@@ -75,7 +76,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 두 번째 슬라이드 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-2"></div>
                 <div class="slide-overlay"></div>
@@ -89,7 +89,6 @@
                     </div>
                 </div>
             </div>
-                <!-- 세 번째 슬라이드 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-3"></div>
                 <div class="slide-overlay"></div>
@@ -104,6 +103,8 @@
                 </div>
             </div>
         </div>
+        
+        <!-- 슬라이더 컨트롤 -->
         <div class="slider-controls">
             <label for="slide1"></label>
             <label for="slide2"></label>
@@ -111,5 +112,4 @@
         </div>
     </div>
 </body>
-
 </html>

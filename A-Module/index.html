@@ -149,11 +149,16 @@
     </header>
 
 
-    <!-- 비주얼 슬라이더 영역 시작 -->
+    <!-- 비주얼 슬라이더 영역 -->
     <div class="visual-slider">
+        <input type="radio" name="slider" id="slide1" checked>
+        <input type="radio" name="slider" id="slide2">
+        <input type="radio" name="slider" id="slide3">
+        
         <!-- 슬라이더 컨테이너 -->
         <div class="slider-container">
-            <!-- 첫 번째 슬라이드 -->
+            <!-- 슬라이드 반복 (1-3번) -->
+            <!-- 슬라이드 1 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-1"></div>
                 <div class="slide-overlay"></div>
@@ -162,18 +167,13 @@
                     <h2 class="slide-title">Better Give & Take</h2>
                     <p class="slide-subtitle">옴니채널 플랫폼 GIFTS로 전 세계 고객에게 선물의 가치를 높입니다.</p>
                     <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">자세히 보기 <i class="fa fa-arrow-right"></i></a>
+                        <a href="#" class="slide-btn primary-btn">자세히 보기<i class="fa fa-arrow-right"></i></a>
                         <a href="#" class="slide-btn outline-btn">선물하기 <i class="fa fa-gift"></i></a>
                     </div>
                 </div>
-                <div class="slide-decor">
-                    <i class="fa fa-gift decor-icon"></i>
-                    <i class="fa fa-heart decor-icon"></i>
-                    <i class="fa fa-star decor-icon"></i>
-                </div>
             </div>
 
-            <!-- 두 번째 슬라이드 -->
+            <!-- 슬라이드 2 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-2"></div>
                 <div class="slide-overlay"></div>
@@ -186,14 +186,9 @@
                         <a href="#" class="slide-btn outline-btn">라이프스타일 <i class="fa fa-heart"></i></a>
                     </div>
                 </div>
-                <div class="slide-decor">
-                    <i class="fa fa-star decor-icon"></i>
-                    <i class="fa fa-magic decor-icon"></i>
-                    <i class="fa fa-heart decor-icon"></i>
-                </div>
             </div>
 
-            <!-- 세 번째 슬라이드 -->
+            <!-- 슬라이드 3 -->
             <div class="slide">
                 <div class="slide-bg slide-bg-3"></div>
                 <div class="slide-overlay"></div>
@@ -206,15 +201,11 @@
                         <a href="#" class="slide-btn outline-btn">배송조회 <i class="fa fa-truck"></i></a>
                     </div>
                 </div>
-                <div class="slide-decor">
-                    <i class="fa fa-truck decor-icon"></i>
-                    <i class="fa fa-clock-o decor-icon"></i>
-                    <i class="fa fa-thumbs-up decor-icon"></i>
-                </div>
             </div>
-            <!-- 첫 번째 슬라이드 -->
+            
+            <!-- 슬라이드 반복 (동일 슬라이드 1-3번 반복) -->
             <div class="slide">
-                <div class="slide-bg slide-bg-4"></div>
+                <div class="slide-bg slide-bg-1"></div>
                 <div class="slide-overlay"></div>
                 <div class="slide-content">
                     <span class="slide-tag"><i class="fa fa-gift"></i> 브랜드 철학</span>
@@ -225,18 +216,40 @@
                         <a href="#" class="slide-btn outline-btn">선물하기 <i class="fa fa-gift"></i></a>
                     </div>
                 </div>
-                <div class="slide-decor">
-                    <i class="fa fa-gift decor-icon"></i>
-                    <i class="fa fa-heart decor-icon"></i>
-                    <i class="fa fa-star decor-icon"></i>
+            </div>
+            <div class="slide">
+                <div class="slide-bg slide-bg-2"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-tag"><i class="fa fa-star"></i> 비전</span>
+                    <h2 class="slide-title">Life Style Platforms</h2>
+                    <p class="slide-subtitle">고객과 가장 가까운 곳에서 고객에게 다양한 즐거움을 선물합니다.</p>
+                    <div class="slide-action">
+                        <a href="#" class="slide-btn primary-btn">스타일 보기 <i class="fa fa-arrow-right"></i></a>
+                        <a href="#" class="slide-btn outline-btn">라이프스타일 <i class="fa fa-heart"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide">
+                <div class="slide-bg slide-bg-3"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-tag"><i class="fa fa-truck"></i> 서비스</span>
+                    <h2 class="slide-title">Online PLAYGROUND</h2>
+                    <p class="slide-subtitle">업계 최초 당일 배송 서비스인 '오늘드림'으로 고객 니즈 충족과 고객 경험을 혁신합니다.</p>
+                    <div class="slide-action">
+                        <a href="#" class="slide-btn primary-btn">당일배송 확인 <i class="fa fa-arrow-right"></i></a>
+                        <a href="#" class="slide-btn outline-btn">배송조회 <i class="fa fa-truck"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!-- 슬라이드 네비게이션 및 인디케이터 -->
+        
+        <!-- 슬라이더 컨트롤 -->
         <div class="slider-controls">
-            <button class="prev-btn"><i class="fa fa-angle-left"></i></button>
-            <button class="next-btn"><i class="fa fa-angle-right"></i></button>
+            <label for="slide1"></label>
+            <label for="slide2"></label>
+            <label for="slide3"></label>
         </div>
     </div>
 
