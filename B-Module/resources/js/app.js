@@ -288,8 +288,6 @@ class NonMemberOrderSystem {
     // 시각적 비활성화 제거
     $product.css({
       "opacity": "",
-      "filter": "",
-      "pointer-events": ""
     });
     
     // 장바구니 아이템 배열에서 제거

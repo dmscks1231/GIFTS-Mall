@@ -28,15 +28,11 @@ $(document).ready(function() {
         function() {
             // 호버 해제 시 모든 오버레이 숨김
             $('.overlay-image').css('opacity', '0');
-            
+            // 현재 타입의 모토 캡션 표시
+            $('.gallery-btn').css('opacity','0')
+            $('.gallery-text-p').css('opacity','0')
             // 모든 캡션 다시 표시
             $('.gallery-caption').css('opacity', '1');
-            
-            // 모든 모토 콘텐츠 숨기기
-            $('.motto-content').css('opacity', '0').css('transform', 'translate(-50%, -55%)');
-            
-            // 정보보안 아이템일 경우 추가 커서 아이콘 숨김
-            $('.cursor-icon').css('opacity', '0');
         }
     );
 });

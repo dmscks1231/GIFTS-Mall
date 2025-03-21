@@ -7,387 +7,7 @@
     <title>GIFTS:Mall - 소개</title>
     <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
     <link rel="stylesheet" href="./resources/css/style.css">
-    <style>
-        /* 소개 페이지 특화 스타일 */
-        .about-hero {
-            height: 400px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            margin-top: 85px;
-            position: relative;
-        }
-
-        .hero-content {
-            max-width: 800px;
-            padding: 0 20px;
-            z-index: 2;
-        }
-
-        .hero-title {
-            font-size: 40px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            letter-spacing: -0.5px;
-        }
-
-        .hero-subtitle {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            font-weight: 300;
-        }
-
-        .about-section {
-            padding: 80px 0;
-        }
-
-        .about-section:nth-child(even) {
-            background-color: #f9f9f9;
-        }
-
-        .content-block {
-            display: flex;
-            max-width: 1200px;
-            margin: 0 auto 80px;
-            align-items: center;
-            gap: 50px;
-        }
-
-        .content-block:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .image-container {
-            flex: 1;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: 375px;
-            border-radius: 15px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .text-container {
-            flex: 1;
-        }
-
-        .block-title {
-            font-size: 30px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #333;
-            position: relative;
-            display: inline-block;
-        }
-
-        .block-title::after {
-            content: "";
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background-color: #e54980;
-            bottom: -10px;
-            left: 0;
-            border-radius: 2px;
-        }
-
-        .block-description {
-            font-size: 14px;
-            line-height: 1.7;
-            color: #555;
-            margin-top: 30px;
-        }
-
-        .key-figures {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .key-figure {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            flex: 1 1 calc(50% - 15px);
-            transition: all 0.3s ease;
-        }
-
-        .key-figure:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(229, 73, 128, 0.15);
-        }
-
-        .figure-number {
-            font-size: 28px;
-            font-weight: 700;
-            color: #e54980;
-            margin-bottom: 10px;
-        }
-
-        .figure-label {
-            font-size: 16px;
-            color: #666;
-        }
-
-        /* 모토 갤러리 섹션 스타일 */
-        .motto-section {
-            padding: 80px 0;
-            background-color: #fff;
-        }
-
-        .motto-header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .motto-title {
-            font-size: 34px;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 15px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .motto-title::after {
-            content: "";
-            position: absolute;
-            width: 70px;
-            height: 3px;
-            background-color: #e54980;
-            bottom: -10px;
-            border-radius: 2px;
-        }
-
-        .motto-subtitle {
-            font-size: 16px;
-            color: #666;
-            max-width: 600px;
-            margin: 20px auto 0;
-            font-weight: 300;
-            letter-spacing: -0.3px;
-        }
-
-        /* 모토 갤러리 스타일 */
-        .gallery-container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 8px;
-            height: 500px;
-        }
-        
-        .gallery-item {
-            position: relative;
-            height: 100%;
-            overflow: hidden;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        
-        .gallery-item:hover {
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-        }
-        
-        .gallery-item img.main-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1;
-            position: relative;
-            transition: all 0.4s ease;
-        }
-        
-        .gallery-caption {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            color: white;
-            font-size: 24px;
-            font-weight: bold;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-            z-index: 20;
-        }
-        
-        /* 호버 효과를 위한 오버레이 이미지 */
-        .overlay-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 500%; /* 하나의 이미지를 5등분 */
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: all 0.4s ease;
-            z-index: 10;
-        }
-        
-        /* 각 아이템의 위치에 따라 다른 이미지 부분 보여주기 */
-        .gallery-item:nth-child(1) .overlay-image {
-            left: 0%; /* 첫 번째 부분 */
-        }
-        
-        .gallery-item:nth-child(2) .overlay-image {
-            left: -100%; /* 두 번째 부분 */
-        }
-        
-        .gallery-item:nth-child(3) .overlay-image {
-            left: -200%; /* 세 번째 부분 */
-        }
-        
-        .gallery-item:nth-child(4) .overlay-image {
-            left: -300%; /* 네 번째 부분 */
-        }
-        
-        .gallery-item:nth-child(5) .overlay-image {
-            left: -400%; /* 다섯 번째 부분 */
-        }
-    
-        /* 480px 이하 모바일 반응형 스타일 */
-        @media (max-width: 480px) {
-
-            /* 히어로 섹션 조정 */
-            .about-hero {
-                height: 250px;
-                margin-top: 60px;
-            }
-
-            .hero-title {
-                font-size: 28px;
-                margin-bottom: 10px;
-            }
-
-            .hero-subtitle {
-                font-size: 14px;
-                margin-bottom: 20px;
-            }
-
-            /* 소개 콘텐츠 섹션 조정 */
-            .about-section {
-                padding: 40px 0;
-            }
-
-            .section-header {
-                margin-bottom: 30px;
-            }
-
-            .section-title {
-                font-size: 24px;
-            }
-
-            .section-subtitle {
-                font-size: 14px;
-                margin-top: 15px;
-            }
-
-            /* 콘텐츠 블록 레이아웃 변경 */
-            .content-block {
-                flex-direction: column;
-                margin: 0 auto 50px;
-                gap: 20px;
-            }
-
-            /* 홀수/짝수 블록 모두 동일한 순서로 표시 */
-            .content-block:nth-child(even) {
-                flex-direction: column;
-            }
-
-            .image-container img {
-                height: 200px;
-            }
-
-            .block-title {
-                font-size: 22px;
-                margin-bottom: 15px;
-            }
-
-            .block-description {
-                font-size: 13px;
-                line-height: 1.6;
-                margin-top: 20px;
-            }
-
-            /* 핵심 지표 섹션 */
-            .key-figures {
-                flex-direction: column;
-                gap: 15px;
-                margin-top: 20px;
-            }
-
-            .key-figure {
-                width: 100%;
-                padding: 15px;
-            }
-
-            .figure-number {
-                font-size: 24px;
-                margin-bottom: 5px;
-            }
-
-            .figure-label {
-                font-size: 14px;
-            }
-
-            /* 모토 갤러리 반응형 스타일 */
-            .motto-section {
-                padding: 40px 0;
-            }
-
-            .motto-title {
-                font-size: 24px;
-            }
-
-            .motto-subtitle {
-                font-size: 14px;
-            }
-
-            .gallery-container {
-                flex-direction: column;
-                height: auto;
-                gap: 15px;
-            }
-
-            .gallery-item {
-                height: 200px;
-            }
-
-            .gallery-item:hover {
-                transform: none;
-                flex: 1;
-            }
-
-            .gallery-caption {
-                font-size: 20px;
-            }
-
-            .motto-content {
-                padding: 15px;
-                width: 85%;
-            }
-
-            .motto-content .motto-title {
-                font-size: 20px;
-                margin-bottom: 10px;
-            }
-            
-            .motto-content p {
-                font-size: 14px;
-                margin-top: 10px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="./resources/css/sub1.css">
 </head>
 
 <body>
@@ -622,31 +242,54 @@
                 <div class="gallery-item" data-type="motto1">
                     <img class="main-image" src="./resources/images/motto1.jpg" alt="행복신뢰">
                     <div class="gallery-caption motto1">행복신뢰</div>
+                    <div class="gallery-btn motto1">
+                        <i class="fa fa-arrow-right fa-rotate-300"></i>
+                    </div>
                 </div>
                 
                 <!-- 가치나눔 -->
                 <div class="gallery-item" data-type="motto2">
                     <img class="main-image" src="./resources/images/motto2.jpg" alt="가치나눔">
                     <div class="gallery-caption motto2">가치나눔</div>
+                    <div class="gallery-btn motto2">
+                        <i class="fa fa-arrow-right fa-rotate-300"></i>
+                    </div>
                 </div>
                 
                 <!-- 환경선도 -->
                 <div class="gallery-item" data-type="motto3">
                     <img class="main-image" src="./resources/images/motto3.jpg" alt="환경선도">
                     <div class="gallery-caption motto3">환경선도</div>
+                    <div class="gallery-btn motto3">
+                        <i class="fa fa-arrow-right fa-rotate-300"></i>
+                    </div>
                 </div>
                 
                 <!-- 미래혁신 -->
                 <div class="gallery-item" data-type="motto4">
                     <img class="main-image" src="./resources/images/motto4.jpg" alt="미래혁신">
                     <div class="gallery-caption motto4">미래혁신</div>
+                    <div class="gallery-btn motto4">
+                        <i class="fa fa-arrow-right fa-rotate-300"></i>
+                    </div>
                 </div>
                 
                 <!-- 정보보안 -->
                 <div class="gallery-item" data-type="motto5">
                     <img class="main-image" src="./resources/images/motto5.jpg" alt="정보보안">
                     <div class="gallery-caption motto5">정보보안</div>
+                    <div class="gallery-btn motto5">
+                        <i class="fa fa-arrow-right fa-rotate-300"></i>
+                    </div>
+                    <div class="gallery-text">
+                        <p class="gallery-text-p motto1">고객신뢰를 바탕으로 행복한 사회를 추구하는 글로벌 기업</p>
+                        <p class="gallery-text-p motto2">기업의 가치 혁신의 출발은 나눔을 시작으로 고객 가치를 탐험한다.</p>
+                        <p class="gallery-text-p motto3">세계 기후변화 대응을 위해 100% 재생에너지로 생산된 제품만 선별한다.</p>
+                        <p class="gallery-text-p motto4">다른 생각 다른 미래, 플랫폼 기반의 글로벌 미래 혁신을 선도한다.</p>
+                        <p class="gallery-text-p motto5">글로벌 수준의 개인정보보호 및 보안 체계를 유지한다.</p>
+                    </div>
                 </div>
+               
             </div>
         </div>
     </section>
