@@ -592,7 +592,7 @@ input[type=radio] {
     position: absolute;
     z-index: 3;
     top: 50%;
-    left: 15%;
+    left: 16.5%;
     transform: translateY(-50%);
     color: #fff;
     max-width: 500px;
@@ -696,7 +696,7 @@ input[type=radio] {
 .slider-controls {
     position: absolute;
     bottom: 50px;
-    left: 19%;
+    left: 20.5%;
     transform: translateX(-50%);
     z-index: 10;
     display: flex;
@@ -2558,7 +2558,7 @@ input[type=radio] {
     }
     
     .slider-controls {
-        bottom: 30px;
+        bottom: 10px;
         left: 5%;
         transform: none;
     }

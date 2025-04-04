@@ -1,115 +1,259 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GIFTS:Mall</title>
+    <title>GIFTS:Mall - 전체상품</title>
     <link rel="stylesheet" href="./resources/css/font-awesome.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./resources/css/sub2.css">
 </head>
-<body>
-    <!-- 비주얼 슬라이더 영역 -->
-    <div class="visual-slider">
-        <input type="radio" name="slider" id="slide1" checked>
-        <input type="radio" name="slider" id="slide2">
-        <input type="radio" name="slider" id="slide3">
-        
-        <!-- 슬라이더 컨테이너 -->
-        <div class="slider-container">
-            <!-- 슬라이드 반복 (1-3번) -->
-            <!-- 슬라이드 1 -->
-            <div class="slide">
-                <div class="slide-bg slide-bg-1"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-gift"></i> 브랜드 철학</span>
-                    <h2 class="slide-title">Better Give & Take</h2>
-                    <p class="slide-subtitle">옴니채널 플랫폼 GIFTS로 전 세계 고객에게 선물의 가치를 높입니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">자세히 보기<i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">선물하기 <i class="fa fa-gift"></i></a>
-                    </div>
-                </div>
-            </div>
 
-            <!-- 슬라이드 2 -->
-            <div class="slide">
-                <div class="slide-bg slide-bg-2"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-star"></i> 비전</span>
-                    <h2 class="slide-title">Life Style Platforms</h2>
-                    <p class="slide-subtitle">고객과 가장 가까운 곳에서 고객에게 다양한 즐거움을 선물합니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">스타일 보기 <i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">라이프스타일 <i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
+<!-- HTML 부분 -->
+<section class="video-section">
+    <div class="container">
+        <div class="v-wrapper">
+            <video id="video" src="./resources/video/AD.mp4" preload="auto" muted></video>
 
-            <!-- 슬라이드 3 -->
-            <div class="slide">
-                <div class="slide-bg slide-bg-3"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-truck"></i> 서비스</span>
-                    <h2 class="slide-title">Online PLAYGROUND</h2>
-                    <p class="slide-subtitle">업계 최초 당일 배송 서비스인 '오늘드림'으로 고객 니즈 충족과 고객 경험을 혁신합니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">당일배송 확인 <i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">배송조회 <i class="fa fa-truck"></i></a>
+            <button id="showBtn" onclick="showControls()" class="show-btn">
+                <i class="fa fa-sliders"></i> 컨트롤러 보이기
+            </button>
+
+            <div id="controls" class="controls">
+                <div class="control-panel">
+                    <!-- 주요 컨트롤 -->
+                    <div class="c-group">
+                        <button onclick="rewind()" title="10초 되감기"><i class="fa fa-backward"></i></button>
+                        <button id="playBtn" onclick="togglePlay()" class="play" title="재생/일시정지">
+                            <i class="fa fa-play"></i>
+                        </button>
+                        <button onclick="stop()" title="정지"><i class="fa fa-stop"></i></button>
+                        <button onclick="forward()" title="10초 빨리감기"><i class="fa fa-forward"></i></button>
+                    </div>
+
+                    <!-- 속도 컨트롤 -->
+                    <div class="c-group">
+                        <button onclick="changeSpeed(-0.1)" title="감속"><i class="fa fa-minus"></i></button>
+                        <button onclick="resetSpeed()" title="기본 속도"><span id="speed">1.0x</span></button>
+                        <button onclick="changeSpeed(0.1)" title="배속"><i class="fa fa-plus"></i></button>
+                    </div>
+
+                    <!-- 설정 컨트롤 -->
+                    <div class="c-group">
+                        <button id="loopBtn" onclick="toggleLoop()" title="반복 재생">
+                            <i class="fa fa-repeat"></i>
+                        </button>
+                        <button id="autoBtn" onclick="toggleAuto()" title="자동 재생">
+                            <i class="fa fa-play-circle"></i>
+                        </button>
+                        <button onclick="hideControls()" title="컨트롤러 숨기기">
+                            <i class="fa fa-eye-slash"></i>
+                        </button>
                     </div>
                 </div>
             </div>
-            
-            <!-- 슬라이드 반복 (동일 슬라이드 1-3번 반복) -->
-            <div class="slide">
-                <div class="slide-bg slide-bg-1"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-gift"></i> 브랜드 철학</span>
-                    <h2 class="slide-title">Better Give & Take</h2>
-                    <p class="slide-subtitle">옴니채널 플랫폼 GIFTS로 전 세계 고객에게 선물의 가치를 높입니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">자세히 보기 <i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">선물하기 <i class="fa fa-gift"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide-bg slide-bg-2"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-star"></i> 비전</span>
-                    <h2 class="slide-title">Life Style Platforms</h2>
-                    <p class="slide-subtitle">고객과 가장 가까운 곳에서 고객에게 다양한 즐거움을 선물합니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">스타일 보기 <i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">라이프스타일 <i class="fa fa-heart"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="slide">
-                <div class="slide-bg slide-bg-3"></div>
-                <div class="slide-overlay"></div>
-                <div class="slide-content">
-                    <span class="slide-tag"><i class="fa fa-truck"></i> 서비스</span>
-                    <h2 class="slide-title">Online PLAYGROUND</h2>
-                    <p class="slide-subtitle">업계 최초 당일 배송 서비스인 '오늘드림'으로 고객 니즈 충족과 고객 경험을 혁신합니다.</p>
-                    <div class="slide-action">
-                        <a href="#" class="slide-btn primary-btn">당일배송 확인 <i class="fa fa-arrow-right"></i></a>
-                        <a href="#" class="slide-btn outline-btn">배송조회 <i class="fa fa-truck"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 슬라이더 컨트롤 -->
-        <div class="slider-controls">
-            <label for="slide1"></label>
-            <label for="slide2"></label>
-            <label for="slide3"></label>
         </div>
     </div>
-</body>
-</html>
+</section>
+
+<!-- CSS 부분 -->
+<style>
+    .video-section {
+        padding: 60px 0 40px;
+        margin-top: 85px;
+        background-color: #fff;
+        position: relative;
+    }
+
+    .v-wrapper {
+        position: relative;
+        width: 100%;
+        margin: 0 auto;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .v-wrapper video {
+        width: 100%;
+        display: block;
+        background-color: #000;
+    }
+
+    .show-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background-color: rgba(0, 0, 0, 0.6);
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        color: white;
+        border-radius: 50px;
+        padding: 10px 15px;
+        cursor: pointer;
+        z-index: 10;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+        font-size: 16px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        display: none;
+    }
+
+    .show-btn:hover {
+        opacity: 1;
+        background-color: rgba(229, 73, 128, 0.8);
+    }
+
+    .controls {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 15px 20px;
+        background: rgba(0, 0, 0, 0.7);
+        color: #fff;
+        z-index: 3;
+        transition: opacity 0.3s ease;
+    }
+
+    .control-panel {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        background-color: rgba(0, 0, 0, 0.5);
+        border-radius: 50px;
+        padding: 10px 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .c-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding-right: 20px;
+        border-right: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .c-group:last-child {
+        border-right: none;
+        padding-right: 0;
+    }
+
+    .c-group button {
+        background-color: rgba(0, 0, 0, 0.3);
+        border: 2px solid rgba(255, 255, 255, 0.5);
+        color: #fff;
+        cursor: pointer;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+    }
+
+    .c-group button.play {
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
+    }
+
+    .c-group button:hover {
+        background-color: rgba(229, 73, 128, 0.7);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-2px);
+    }
+
+    .c-group button.active {
+        background-color: #e54980;
+        color: #fff;
+        border-color: #fff;
+    }
+</style>
+
+<script src="./resources/js/jquery-3.4.1.min.js"></script>
+<script src="./resources/js/video.js"></script>
+
+<script>
+    $(document).ready(function() {
+    const $video = $("#video")[0];
+    const $controls = $("#controls");
+    const $showBtn = $("#showBtn");
+    const $playBtn = $("#playBtn");
+    const $loopBtn = $("#loopBtn");
+    const $autoBtn = $("#autoBtn");
+    const $speed = $("#speed");
+    
+    const videoControls = {
+        togglePlay: () => {
+            $video.paused ? $video.play() : $video.pause();
+        },
+        
+        stop: () => {
+            $video.pause();
+            $video.currentTime = 0;
+        },
+        
+        seek: (seconds) => {
+            $video.currentTime += seconds;
+        },
+        
+        changeSpeed: (amount) => {
+            $video.playbackRate = Math.max(0.1, Math.min(3.0, $video.playbackRate + amount));
+            $speed.text($video.playbackRate.toFixed(1) + 'x');
+        },
+        
+        toggleLoop: () => {
+            const isLoop = !$video.loop;
+            $video.loop = isLoop;
+            $loopBtn.toggleClass('active', isLoop)
+                    .html(`<i class="fa fa-repeat${isLoop ? ' fa-spin' : ''}"></i>`);
+        },
+        
+        toggleAuto: () => {
+            const newState = localStorage.getItem("autoPlay") !== "true";
+            $video.autoplay = newState;
+            localStorage.setItem("autoPlay", String(newState));
+            $autoBtn.toggleClass('active', newState);
+            
+            if(newState) {
+                $video.muted = true;
+                $video.play();
+            }
+        },
+        
+        toggleControls: (show) => {
+            $controls.toggle(show);
+            $showBtn.toggle(!show);
+        }
+    };
+    
+    $showBtn.hide();
+    
+    if(localStorage.getItem("autoPlay") === "true") {
+        $video.autoplay = true;
+        $video.muted = true;
+        $autoBtn.addClass('active');
+    }
+    
+    $($video).on({
+        'play': () => $playBtn.html('<i class="fa fa-pause"></i>'),
+        'pause': () => $playBtn.html('<i class="fa fa-play"></i>')
+    });
+    
+    window.togglePlay = videoControls.togglePlay;
+    window.stop = videoControls.stop;
+    window.rewind = () => videoControls.seek(-10);
+    window.forward = () => videoControls.seek(10);
+    window.changeSpeed = videoControls.changeSpeed;
+    window.resetSpeed = () => videoControls.changeSpeed(-$video.playbackRate + 1);
+    window.toggleLoop = videoControls.toggleLoop;
+    window.toggleAuto = videoControls.toggleAuto;
+    window.hideControls = () => videoControls.toggleControls(false);
+    window.showControls = () => videoControls.toggleControls(true);
+});
+</script>
